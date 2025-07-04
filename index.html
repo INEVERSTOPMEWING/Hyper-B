@@ -1,0 +1,2668 @@
+<DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hyper-B</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"> 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"> 
+    <style>
+        /* Global Styles */
+        
+
+     
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-size:cover;
+            background-size: cover;
+            padding: 0;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+            overflow: hidden;
+            
+        }
+        .hr {
+            border: 0;
+            border-top: 2px solid #3498db;
+            width: 80%;
+            margin: 20px auto;
+        }
+
+        .favhidden {
+            display: none;
+        }
+
+
+        .input-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        .inputt2 {
+            appearance: none;
+                width: 80px;
+                height: 30px;
+                border: none;
+                border-radius: 30px;
+                background: #f0f0f0;
+                color: #333;
+                font-size: 25px;
+                padding: 0px;
+                cursor: pointer;
+                transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .inputt2:hover {
+            outline: none;
+            background-color: #e6e6e6;
+            transform: scale(1.05);
+        }
+
+       
+        .design {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            width: 200px;
+            height: 50px;
+            border: none;
+            border-radius: 30px;
+            background: #f0f0f0;
+            color: #333;
+            font-size: 18px;
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .design:hover {
+            outline: none;
+            background-color: #e6e6e6;
+            transform: scale(1.05);
+        }
+        .design:focus {
+            outline: none;
+            background-color: #e6e6e6;
+            transform: scale(1.05);
+        }
+
+        .input-container label {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+
+        table {
+            width: 50%; /* Tabelle nimmt 50% der Breite des Containers ein */
+            margin: 0 auto; /* Zentriert die Tabelle horizontal */
+            border-collapse: collapse; /* Entfernt den Abstand zwischen den Zellen */
+        }
+        th, td {
+            border: 1px solid black; /* Rahmen für die Zellen */
+            padding: 8px; /* Innenabstand in den Zellen */
+            text-align: left; /* Text linksbündig */
+        }
+        th {
+            background-color: #f2f2f2; /* Hintergrundfarbe für Kopfzeilen */
+
+        }
+
+       
+
+        .overlay {
+            
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            color: rgb(0, 0, 0);
+            text-align:center;
+           
+           
+            z-index: 100;
+        }
+     
+
+
+
+        .search-container {
+            text-align: center;
+            padding: 40px;
+            border-radius: 30px; /* Runderes Suchfeld */
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 450px;
+            backdrop-filter: blur(12px); /* Glassmorphism: Unschärfe */
+            background: rgba(255, 255, 255, 0.6 );  /*Halbtransparentes Weiß */
+            position: relative;
+        }
+       
+       
+       
+       
+
+        .h1 {
+            
+            font-size: 28px;
+            font-weight: 600;
+           
+            margin-bottom: 50px;
+            color: #1e3a8a; 
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2); /* Weicher Text-Schatten */
+           
+        }
+
+       
+
+        h2 {
+            font-size: 24px;
+            font-weight: 500;
+            color: #333;
+            margin-top: 20px;
+            transition: color 0.3s ease; /* Übergang für den Text */
+        }
+
+        h2.private-mode {
+            color: #b22222; /* Dunkelrot für den Text "Private" im Private-Modus */
+        }
+
+        search-button.privatemode {
+            background-color: #b22222; /* Dunkelroter Button im Private-Modus */
+        }
+
+        @keyframes fadeText {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+       
+        .search-box {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+        .cv {
+            font-family: 'Courier New', Courier, monospace;
+            
+        }
+
+        
+
+        .search-input {
+            padding: 15px 20px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 50px 0 0 50px; /* Ecken nur links abgerundet */
+            background-color: rgba(255, 255, 255, 0.8); /* leicht transparent */
+            color: #333;
+            width: 100%;
+            box-sizing: border-box;
+            border-right: none;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        .search-input:focus {
+            background-color: rgba(255, 255, 255, 1); /* weniger transparent */
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 122, 255, 0.6); /* Fokus-Effekt */
+        }
+
+        .search-button {
+            padding: 12px;
+            font-size: 18px;
+            background-color: #1e3a8a;
+            color: white;
+            border: none;
+            border-radius: 0 50px 50px 0; /* Ecken nur rechts abgerundet */
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            height: 100%;
+            width: 60px;
+
+            
+           
+        }
+
+        .search-button:hover {
+           
+            transform: scale(1.05);
+        }
+
+        .search-button:active {
+            background-color: #004084;
+        }
+
+        .search-button:focus {
+            outline: none;
+        }
+
+        .search-button i {
+            font-size: 22px;
+        }
+
+        /* Hamburger Button für das Menü */
+        .menu-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: transparent;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            z-index: 1000;
+            color: #1e3a8a;
+            transition: transform 0.3s ease, color 0.3s ease;
+            padding: 8px; /* Kleinerer Button */
+            border-radius: 50%; /* Runde Ecken */
+            z-index: 1000;
+        }
+
+        
+
+
+        .menu-toggle:hover {
+            transform: scale(1.1);
+            background-color: rgba(0, 0, 0, 0.1);
+            
+        }
+
+        /* Menu Button rotate animation */
+        .menu-toggle.rotated {
+            transform: rotate(90deg); /* Button dreht sich nach rechts */
+        }
+
+        /* Menü */
+        .side-menu {
+            position: fixed;
+            top: 0;
+            left: -300px; /* Menü breiter machen */
+            width: 300px; /* Breiteres Menü */
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.4 ); /* Halbtransparentes Weiß wie das Suchfeld */
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3); /* Schatten für das Menü */
+            transition: left 0.5s ease, opacity 0.5s ease;
+            padding: 30px;
+            overflow-y: auto; /* Scrollbar für längeres Menü */
+            border-radius: 40px; /* Beide Seiten des Menüs rund machen */
+            opacity: 0; /* Menü wird zuerst unsichtbar gemacht */
+            backdrop-filter: blur(10px); /* Glassmorphism-Effekt */
+            z-index: 900;
+            overflow: scroll
+        }
+        .side-menu::-webkit-scrollbar {
+            display: none; /* Scrollbar ausblenden */
+        }
+
+        .side-menu.open {
+            left: 0;
+            opacity: 1; /* Menü sichtbar machen */
+        }
+
+        .side-menu ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .side-menu ul li {
+            margin: 35px 0; /* Button tiefer machen */
+           
+            color: #1e3a8a; /* Dunkelblau für den Text */
+            cursor: pointer;
+            padding: 16px 24px;
+            border-radius: 15px; /* Abgerundete Ecken für die Buttons */
+            transition: background-color 0.3s ease;
+            border: 1px solid #001380; /* Kein Rahmen, aber für den Hover-Effekt */
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: #1e3a8a; /* Helleres Blau für den Text */
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2); /* Weicher Text-Schatten */
+            animation: fadeText 2s ease-in-out; /* Fade Animation */
+        }
+        
+
+        
+
+        .side-menu ul li:active {
+            background-color: #1e3a8a; /* Dunkelblau bei Auswahl */
+            color: white; /* Weißer Text bei Auswahl */
+            border: 1px solid #1e3a8a; /* Dunkelblauer Rahmen bei Auswahl */
+        }
+
+        /* History List Styles */
+        .history-list {
+            max-height: 200px; /* Kleinere Höhe für die Historie */
+            overflow-y: auto;
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+            display: none; /* Anfangs versteckt */
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .privatemode .history-list {
+            background: #333;
+        }
+
+        .history-item {
+            font-size: 16px; /* Kleinere Schrift für die Historie */
+            padding: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .history-item:hover {
+            background-color: #e3f2fd;
+        }
+        .privatemode .history-item:hover {
+            background-color: red;
+        }
+
+        .history-item .delete-btn {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            color: #ff0000;
+            transition: color 0.3s ease;
+        }
+
+        .history-item .delete-btn:hover {
+            color: #cc0000;
+        }
+
+        .history-close {
+            font-size: 16px;
+            color: #007aff;
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: block;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .clear-history {
+            font-size: 16px;
+            color: #ff0000;
+            cursor: pointer;
+            text-align: center;
+            margin-top: 20px;
+        }
+        /* "+" Button Styling */
+        .add-widget-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            color: #1e3a8a;
+            border-color: #1e3a8a;
+            font-size: 32px;
+            cursor: pointer;
+            border-radius: 30px; /* Runderes Suchfeld */
+            box-shadow: 0 12px 40px rgba(135, 37, 201, 0.1);
+            width: 40px;
+            height: 40px;
+            max-width: 450px;
+            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.7);
+            
+        }
+        
+
+        .add-widget-button:hover {
+            background-color: #bbdefb;
+            transform: scale(1.05);
+           
+        }      
+
+        .add-widget-button:active {
+            background-color: #ffffff;
+        }
+
+
+        .add-prwidget-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #333;
+            color: #840000;
+            border: none;
+            font-size: 32px;
+            cursor: pointer;
+            border-radius: 30px; 
+            box-shadow: 0 12px 40px rgba(135, 37, 201, 0.1);
+            width: 40px;
+            height: 40px;
+            max-width: 450px;
+            backdrop-filter: blur(12px);
+           
+            
+        }
+        
+
+        .add-prwidget-button:hover {
+            background-color: black;
+            transform: scale(1.05);
+           
+        }      
+
+        
+
+/* Container für die Widgets */
+.widget-container {
+    position: fixed;
+    bottom: 20px;  /* Positioniere die Widgets am unteren Rand */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;  /* Flexbox verwenden, um Widgets horizontal anzuordnen */
+    gap: 10px;
+    z-index: 10;
+    text-align: center;
+    flex-wrap: nowrap;  /* Verhindert Umbrüche */
+    justify-content: flex-start;  /* Widgets am Anfang der Zeile ausrichten */
+    
+}
+
+.widget-containerpr {
+    position: fixed;
+    top: 20px;  /* Positioniere die Widgets am unteren Rand */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;  /* Flexbox verwenden, um Widgets horizontal anzuordnen */
+    gap: 10px;
+    text-align: center;
+    flex-wrap: nowrap;  /* Verhindert Umbrüche */
+    justify-content: flex-start;  /* Widgets am Anfang der Zeile ausrichten */
+}
+
+/* Styles für das Widget */
+.widget {
+    text-align: center;
+   
+    padding: 20px;
+    border-radius: 15px; /* Runderes Widget */
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+    max-width: 200px;
+    width: auto;
+    backdrop-filter: blur(12px); /* Glassmorphism: Unschärfe */
+    background: rgba(255, 255, 255, 0.6); /* Halbtransparentes Weiß */
+    display: flex;
+    flex-direction: column;  /* Widgets vertikal anordnen */
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+   
+}
+
+.widgetpr {
+    text-align: center;
+   
+    padding: 20px;
+    border-radius: 15px; /* Runderes Widget */
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+    max-width: 200px;
+    width: auto;
+    backdrop-filter: blur(12px); /* Glassmorphism: Unschärfe */
+    background: rgba(255, 255, 255, 0.733); /* Halbtransparentes Weiß */
+    display: flex;
+    flex-direction: column;  /* Widgets vertikal anordnen */
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    display: none;
+
+   
+}
+.widgetpr a {
+    font-size: 25px;
+    margin-bottom: 10px;
+    display: block;
+    text-decoration: none;
+}
+.widget a {
+    font-size: 25px;
+    margin-bottom: 10px;
+    display: block;
+    text-decoration: none;
+}
+
+
+
+
+
+
+
+
+
+/* Löschen-Button im Widget */
+.widget .delete-widget {
+    background-color: transparent;
+    border: none;
+    color: #ff0000;
+    font-size: 18px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.hackenBtn {
+    height: 50;
+    width: 50;
+    border: none;
+    border-radius: 80px;
+    position: absolute;
+    top: 780px;
+    left: 235px;
+    font-size: 25px;
+
+}
+
+.hackenBtn:hover {
+    transform: scale(1.10);
+    box-shadow: black;
+
+}
+
+.hackenBtn3 {
+    height: 30;
+    width: 80;
+    border: none;
+    border-radius: 80px;
+    position: fixed;
+    left: 130;
+    
+    font-size: 20px;
+
+}
+
+.hackenBtn3:hover {
+    transform: scale(1.10);
+    box-shadow: black;
+
+}
+
+.hackenBtn2 {
+    height: 50;
+    width: 50;
+    border: none;
+    border-radius: 80px;
+    position: absolute;
+    top: 880px;
+    left: 235px;
+    font-size: 25px;
+
+}
+
+.hackenBtn2:hover {
+    transform: scale(1.10);
+    box-shadow: black;
+
+}
+
+.hackenBtn4 {
+    height: 30;
+    width: 30;
+    border: none;
+    border-radius: 80px;
+    position: absolute;
+    top: 1435px;
+    left: 235px;
+    font-size: 20px;
+
+}
+
+.hackenBtn4:hover {
+    transform: scale(1.10);
+    box-shadow: black;
+
+}
+.hackenBtn5 {
+    height: 27;
+    width: 55;
+    border: none;
+    border-radius: 80px;
+    position: fixed;
+  
+    font-size: 17px;
+
+}
+
+.hackenBtn5:hover {
+    transform: scale(1.10);
+    box-shadow: black;
+
+}
+    
+.checkboxBorder {
+      width: 20px;
+      height: 20px;
+      accent-color: #000000; 
+      cursor: pointer;
+      position: fixed;
+      top: 1921px;
+      left: 80px;
+      
+     
+    }
+
+    .checkboxBorder1 {
+      width: 20px;
+      height: 20px;
+      accent-color: #000000; 
+      cursor: pointer;
+      position:fixed;
+      top: 2508px;
+      left: 80px;
+      
+     
+    }
+
+.borderhide {
+    display: block;
+}
+
+.borderhide1 {
+    display: block;
+}
+
+mark {
+    
+    background: #000000;
+    color:white;
+    border: none;
+    border-radius: 3px;
+}
+
+.design1 {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            width: 200px;
+            height: 30px;
+            border: none;
+            border-radius: 30px;
+            background: #f0f0f0;
+            color: #333;
+            font-size: 25px;
+            padding: 0px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            
+        }
+
+        .design1:hover {
+            outline: none;
+            background-color: #e6e6e6;
+            transform: scale(1.05);
+        }
+        .design1:focus {
+            outline: none;
+            background-color: #e6e6e6;
+            transform: scale(1.05);
+        }
+
+.inputSideMenu {
+    border : none;
+    border-radius: 16px;
+    height: 30px;
+    width: 180px;
+    font-size: 20px;
+    text-align: center;
+
+}
+
+.BrowserBackGrounds {
+    position: fixed;
+    left: 0;
+    bottom: -30px;
+    z-index: 901;
+    
+    width: 100%;
+    height: 300px;
+    
+    background: black center/cover;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    
+    animation: fadeInUp 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(60px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.backgroundImgs {
+    position: fixed;
+    bottom: 50px;
+    left: 50%;
+    
+    border: 0.1px solid #3a3a3a;
+    border-radius: 30px;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 200px;
+    z-index: 1000;
+    background-color: #000000;
+    
+
+    
+}
+
+.backgroundImgs:hover {
+    scale: 1.02 ;
+    
+}
+
+.invisInput {
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: inherit;
+    outline: none;
+    padding: 4px 8px;
+    z-index: 1000;
+    bottom: 38px;
+    position: fixed;
+    color: white;
+    text-align: center;
+}
+
+
+
+
+    </style>
+</head>
+<body>
+
+
+
+<div class="overlay">
+    <h3 style="font-size: 40px;font-weight: 600;">Hyper-B, Your <mark>Future</mark> Browser!
+    </h3>
+    <hr class="hr">
+    <span></span>
+    <textarea style="font-size: 20px;font-weight: 600;position: relative;border: white; resize: none;outline: none;text-align: center;" rows="20"cols="100" readonly>
+    Hyper-B is a fast and efficient browser that delivers the future.
+    it can call up URLs immediately or search for normal search Terms.
+    The side menu has a lot of features such as Private Tab or Search-
+    History. No login or registration is required.
+
+    Key combinations:
+
+    Alt + n | New tab
+    Shift + Space | Background Menu
+    CTRL | Open Side Menu
+    </textarea>
+    <table >
+    <thead>
+        <tr>
+            <th>CEO</th>
+            <th>Headquarter</th>
+            <th>Created</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Matthias Pawelczak</td>
+            <td>Germany Munich</td>
+            <td>March 2025</td>
+        </tr>
+       
+    </tbody>
+    <thead>
+        <tr>
+            <th>Programmer</th>
+            <th>Designer</th>
+            <th>Tester</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Matthias Pawelczak</td>
+            <td>Matthias Pawelczak</td>
+            <td>Matthias Pawelczak</td>
+        </tr>
+    </tbody>
+    </table>
+
+    <p>Current Version: 4.1</p>
+
+   
+</div>
+
+<!-- xy 320px shritt-->
+<div class="BrowserBackGrounds" id="BrowserBackGrounds" style="display: none;">
+   
+    <p class="backgroundImgs" style="left: 200px;" id="BG1"></p>
+    <p class="backgroundImgs" style="left: 520px;" id="BG2"></p>
+    <p class="backgroundImgs" style="left: 840px;" id="BG3"></p>
+    <p class="backgroundImgs" style="left: 1160px;" id="BG4"></p>
+    <p class="backgroundImgs" style="left: 1480px;" id="BG5"></p>
+
+    <input id="bg1InputText" type="text" class="invisInput" style="left: 100px;" value="Background 1" />
+    <input id="bg2InputText" type="text" class="invisInput" style="left: 420px;" value="Background 2" />
+    <input id="bg3InputText" type="text" class="invisInput" style="left: 740px;" value="Background 3" />
+    <input id="bg4InputText" type="text" class="invisInput" style="left: 1080px;" value="Background 4" />
+    <input id="bg5InputText" type="text" class="invisInput" style="left: 1390px;" value="Background 5" />
+</div>
+
+
+
+<button class="add-widget-button" id="addWidgetButton" title="Add a Favorite">
+    +
+</button>
+<button class="add-prwidget-button" style="display: none;" id="addWidgetButtonTop" title="Add a Private Favorite">
+    +
+</button>
+<div class="widget-container" id="widgetContainer"></div>
+</div>
+
+<button class="menu-toggle" id="menuToggle" title="Menu"><i class="fas fa-bars"></i></button>
+
+<div class="side-menu" id="sideMenu" >
+    <ul>
+        <li id="homeButton">Home</li>
+        <li id="newTabButton">New Tab</li>
+        <li id="privateButton">Private</li>
+       
+        <li id="historyButton">Search History</li>
+       
+        <div id="historyMenu" class="history-list"></div>
+        <p class="clear-history" id="clearHistory" style="display: none;">Clear History</p>
+        <li id="hyperb">Hyper-B</li>
+        
+        <li id="settings">Settings</li>
+       
+        <div class="favhidden">
+            
+            
+            
+            <hr>
+            <p style="text-align: center;font-size: 20px;">Favorites:</p>
+            <hr>
+           
+            <p>Color</p>
+               
+                   
+            <input type="color" id="colorInput" class="design" style="text-align: center;">
+            <button class="hackenBtn"; onclick="location.reload()"; title="Apply on All">✓</button>
+            <p>Background Color</p>
+            <input id="backcolorInput" type="color" class="design" style="text-align: center;">
+            <button class="hackenBtn2"; onclick="location.reload()"; title="Apply on All">✓</button>
+           <hr>
+            <p style="text-align: center;font-size: 20px;">Background Menu:</p>
+            <hr>
+            <button class="design1" id="openMenuBtn">Open Menu</button><hr>
+
+           
+           <p style="text-align: center;font-size: 20px;">Search Box:</p>
+           <hr>
+            <input type="text" id="hyperbText" class="inputSideMenu" placeholder="Hyper-B">
+           
+
+           <p>Color</p>
+           <input type="color" id="stextcolor" class="design" style="text-align: center;">
+
+           <p>Background Color</p>
+           <input type="color" id="sboxcolor" class="design" style="text-align: center;">
+           <p style="font-size: 20px;">Search Button:</p>
+           
+           <p>Color</p>
+           <input type="color" id="sbbutton" class="design" style="text-align: center;">
+           <p>Background Color</p>
+           <input type="color" id="sbutton" class="design" style="text-align: center;">
+           <hr>
+           <p style="text-align: center;font-size: 20px;">Background overall:</p>
+           <hr>
+           <p>Color</p>
+           <input type="color" id="bgo" class="design" style="text-align: center;">
+           <p>Backround Image</p>
+         
+           <input class="design1"  type="file" id="img" accept="image/*" >
+           <br>
+           <br>
+           <button id="setBackgroundButton" class="inputt2">Url</button>
+
+            
+          
+           
+           <hr>
+           <p style="text-align: center;font-size: 20px;">Add Favorites Button:</p>
+           <hr>
+           <p>Color</p>
+           <input type="color" id="addawid" class="design" style="text-align: center;">
+           <p>Background Color</p>
+           <input type="color" id="addwidbg" class="design" style="text-align: center;">
+           <p id="border0""><mark class="mark"> Border</mark></p>
+           
+           <div class="borderhide">
+            
+           <p>Color</p>
+           <input type="color" id="addwidbor" class="design" style="text-align: center;">
+            </div>
+            <hr>
+            <p style="text-align: center;font-size: 20px;">Menu Toggle Button:</p>
+            <hr>
+            <p>Color</p>
+            <input type="color" id="colormenubtn" class="design" style="text-align: center;">
+            <hr>
+            
+            
+            <p style="text-align: center;font-size: 20px;">Menu:</p>
+            <hr>
+            <p>Color</p>
+            <input type="color" id="menuclr" class="design" style="text-align: center;">
+            <p>Background Color</p>
+            <input type="color" id="menuclrbg" class="design" style="text-align: center;">
+            <p style="text-align: left;font-size: 20px;">Menu Buttons:</p>
+            
+            
+            <p>Color</p>
+            <input type="color" id="sidemenucolor" class="design" style="text-align: center;">
+            <p>Background Color</p>
+            <input type="color" id="bgsidemenu" class="design" style="text-align: center;">
+            <p id="border1"><mark class="mark">Border</mark></p>
+            
+            <div class="borderhide1">
+                <p>Color</p>
+                <input type="color" id="colorbtnborder" class="design" style="text-align: center;">
+            </div>
+
+            <hr>
+            <p style="text-align: center;font-size: 20px;">Private:</p>
+            <hr>
+            <p id="pInput">Enter a Password!</p>
+            <input type="text" id="PasswordInput"; placeholder="Password">
+            <hr>
+            <p style="text-align: center;font-size: 20px;">Fast search:</p>
+            <hr>
+            <p id="erstefs">1.</p>
+            <input type="text" id="inputfseins" placeholder=".Name">
+            <input type="url" id="urlfseins" placeholder="https://www.example.com">
+            <p id="zweitefs">2.</p>
+            <input type="text" id="inputfszwei" placeholder=".Name">
+            <input type="url" id="urlfszwei" placeholder="https://www.example.com">
+            <p id="dritefs">3.</p>
+            <input type="text" id="inputfsdrei" placeholder=".Name">
+            <input type="url" id="urlfsdrei" placeholder="https://www.example.com">
+            <br>
+            <br>
+
+            <button id="morebtn" class="hackenBtn5">More</button>
+            <br>
+            <br>
+            <div style="display: none;" id="moremenu">
+            <p>4.</p>
+            <input type="text" id="inputfsvier" placeholder=".Name">
+            <input type="url" id="urlfsvier" placeholder="https://www.example.com">
+            <p>5.</p>
+            <input type="text" id="inputfsfunf" placeholder=".Name">
+            <input type="url" id="urlfsfunf" placeholder="https://www.example.com">
+            <p>6.</p>
+            <input type="text" id="inputfssechs" placeholder=".Name">
+            <input type="url" id="urlfssechs" placeholder="https://www.example.com">
+            <p>7.</p>
+            <input type="text" id="inputfssieben" placeholder=".Name">
+            <input type="url" id="urlfssieben" placeholder="https://www.example.com">
+            <p>8.</p>
+            <input type="text" id="inputfsacht" placeholder=".Name">
+            <input type="url" id="urlfsacht" placeholder="https://www.example.com">
+            <p>9.</p>
+            <input type="text" id="inputfsneun" placeholder=".Name">
+            <input type="url" id="urlfsneun" placeholder="https://www.example.com">
+            <p>10.</p>
+            <input type="text" id="inputfszehn" placeholder=".Name">
+            <input type="url" id="urlfszehn" placeholder="https://www.example.com">
+            </div>
+            <hr>
+            <div id="prfavbtn" style="display: none;">
+                <p style="text-align: center;font-size: 20px;">Add Private Favorites Button:</p>
+                <hr>
+                <p>Color</p>
+                <input type="color" id="addaprwid" class="design" style="text-align: center;">
+                <p>Background Color</p>
+                <input type="color" id="addwidprbg" class="design" style="text-align: center;">
+
+
+            </div>
+            
+            <br>
+            <br>
+            <button id="rstBtn" class="hackenBtn3"; style="display: none;" onclick="localStorage.clear();location.reload()"; title="Reset">Reset</button>
+            <br><br>
+            <hr>
+
+
+        </div>
+
+
+        <p class="cv">Current Version: 4.1</p>
+
+
+    </ul>
+</div>
+
+<div class="search-container"> 
+    <h1 style="font-family: 'Courier New', Courier, monospace;font-size:100px;" id="hypertext">Hyper-B</h1>
+    <h1 id="h1prm" style="font-size: small; font-family: 'Courier New', Courier, monospace;"></h1>
+    <form id="urlForm">
+        <div class="search-box">
+            <input style="font-family: 'Courier New', Courier, monospace;" id="searchInput" class="search-input" type="text" placeholder="Search with Hyper-B..." required>
+            <button id="sbutton" class="search-button" type="submit" title="Search"><i class="fas fa-search"></i></button>
+        </div>
+    </form>
+   
+</div>
+
+
+
+
+<script>
+let prmodus = false;
+const openMenuBtn = document.getElementById('openMenuBtn');
+const bg1InputText = document.getElementById('bg1InputText');
+const bg2InputText = document.getElementById('bg2InputText');
+const bg3InputText = document.getElementById('bg3InputText');
+const bg4InputText = document.getElementById('bg4InputText');
+const bg5InputText = document.getElementById('bg5InputText');
+const bg5 = document.getElementById('BG5');
+const bg4 = document.getElementById('BG4');
+const bg3 = document.getElementById('BG3');
+const bg2 = document.getElementById('BG2');
+const bg1 = document.getElementById('BG1');
+const browserBackgrounds = document.getElementById('BrowserBackGrounds');
+const hyperbText =document.getElementById('hyperbText')
+const bgImgURL =document.getElementById('setBackgroundButton')
+const addaprwid =document.getElementById('addaprwid')
+const addwidprbg =document.getElementById('addwidprbg')
+const urlfszehn =document.getElementById('urlfszehn')
+const inputfszehn =document.getElementById('inputfszehn')
+const urlfsneun =document.getElementById('urlfsneun')
+const inputfsneun =document.getElementById('inputfsneun')
+const urlfsacht =document.getElementById('urlfsacht')
+const inputfsacht =document.getElementById('inputfsacht')
+const urlfssieben =document.getElementById('urlfssieben')
+const inputfssieben =document.getElementById('inputfssieben')
+const urlfssechs =document.getElementById('urlfssechs')
+const inputfssechs =document.getElementById('inputfssechs')
+const urlfsfunf =document.getElementById('urlfsfunf')
+const inputfsfunf =document.getElementById('inputfsfunf')
+const urlfsvier =document.getElementById('urlfsvier')
+const inputfsvier =document.getElementById('inputfsvier')
+const morebtn =document.getElementById('morebtn')
+const urlfsdrei =document.getElementById('urlfsdrei')
+const inputfsdrei =document.getElementById('inputfsdrei')
+const urlfszwei =document.getElementById('urlfszwei')
+const inputfszwei =document.getElementById('inputfszwei')
+const urlfseins = document.getElementById('urlfseins')
+const inputfseins = document.getElementById('inputfseins'); 
+const PasswordInput = document.getElementById('PasswordInput');
+const menuclrbg = document.getElementById('menuclrbg');
+const numimg = document.getElementById('numimg');
+const menuclr = document.getElementById('menuclr');     
+const border1 = document.getElementById('border1');
+const border0 = document.getElementById('border0');
+const colorbtnborder = document.getElementById('colorbtnborder');
+const checkbox1 = document.getElementById('checkbox1');
+const bgsidemenu = document.getElementById('bgsidemenu');
+const sidemenucolor = document.getElementById('sidemenucolor');
+const colormenubtn = document.getElementById('colormenubtn');
+const borderhide = document.querySelector('.borderhide');
+const borderhide1 = document.querySelector('.borderhide1');
+const checkbox = document.getElementById('checkbox');
+const addwidbor = document.getElementById('addwidbor')    
+const addwidbg = document.getElementById('addwidbg')
+const addawid = document.getElementById('addawid')
+const sbbutton = document.getElementById('sbbutton')
+const bgo = document.getElementById('bgo')
+const stextcolor = document.getElementById('stextcolor')
+const sboxcolor = document.getElementById('sboxcolor')
+const addwid = document.getElementById('addwid');
+const settings = document.getElementById('settings');
+const colorInput = document.getElementById('colorInput');
+const overlay = document.querySelector('.overlay');
+const favhidden = document.querySelector('.favhidden');
+const sbutton = document.getElementById('sbutton')
+const backcolorInput = document.getElementById('backcolorInput');
+const menuToggle = document.getElementById('menuToggle');
+const sideMenu = document.getElementById('sideMenu');
+const privateButton = document.getElementById('privateButton');
+const newTabButton = document.getElementById('newTabButton');
+const homeButton = document.getElementById('homeButton');
+const searchInput = document.getElementById('searchInput');
+const privateText = document.getElementById('privateText');
+const historyButton = document.getElementById('historyButton');
+const historyMenu = document.getElementById('historyMenu');
+const clearHistoryButton = document.getElementById('clearHistory');
+let searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
+    document.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+       
+        const activeElement = document.activeElement;
+        if (activeElement === searchInput) {
+            form.dispatchEvent(new Event('submit'));
+            
+        }
+    }
+    });
+    //abwechselnd anzeigen und verstecken
+   let isssmenuOpen = false;
+
+document.addEventListener('keydown', function(event) {
+    // Check for Space key (can use event.code === 'Space' or event.key === ' ')
+    if (event.code === 'Space') {
+        if (event.shiftKey) {
+            // Prevent default space behavior (like scrolling)
+            event.preventDefault();
+            closeMenu();
+            if (isssmenuOpen) {
+                // Wenn das Menü offen ist, schließen wir es
+                document.getElementById('BrowserBackGrounds').style.display = 'none';
+                isssmenuOpen = false;
+            } else {
+                // Wenn das Menü geschlossen ist, öffnen wir es
+                document.getElementById('BrowserBackGrounds').style.display = 'block';
+                isssmenuOpen = true;
+            }
+        }
+    }
+});
+    
+   let ismenuopen = false;
+
+document.addEventListener('keydown', function(event) {
+    if (event.ctrlKey) {
+        event.preventDefault();
+        
+        // Toggle: Umschalten zwischen true/false
+        ismenuopen = !ismenuopen;
+        
+        if (ismenuopen) {
+            openMenuSide();
+        } else {
+            closeMenu();
+        }
+    }
+});
+
+    openMenuBtn.addEventListener('click', () => {
+        // Toggle the visibility of the background menu
+        const browserBackgrounds = document.getElementById('BrowserBackGrounds');
+        if (browserBackgrounds.style.display === 'none' || browserBackgrounds.style.display === '') {
+            browserBackgrounds.style.display = 'block';
+            openMenuBtn.textContent = 'Close Menu';
+            closeMenu();
+        } else {
+            browserBackgrounds.style.display = 'none';
+            openMenuBtn.textContent = 'Open Menu';
+            closeMenu();
+        }
+    });
+
+    let btnmore = false;
+
+    morebtn.addEventListener('click', () => {
+        if (btnmore) {
+        
+            document.getElementById('moremenu').style.display = 'none';
+
+            
+            } else {
+                document.getElementById('moremenu').style.display = 'block';
+                
+            }
+            btnmore = !btnmore;
+    });
+
+    bgImgURL.addEventListener('click', () => {
+            
+            const imageUrlBG = prompt('Enter the URL of the image you want to set as the background:');
+            if (imageUrlBG) {
+                localStorage.setItem('upl', 'false')
+                document.body.style.backgroundImage = `url('${imageUrlBG}')`;
+                localStorage.setItem('imageUrlBG', imageUrlBG);
+                localStorage.setItem('az', 'true')
+            } else {
+                alert('Please enter a valid image URL.');
+            }
+        });
+
+
+let b0o = false;
+
+    border0.addEventListener('click', () => {
+        if (b0o) {
+            borderhide.style.display = 'block';
+            document.querySelector('.add-widget-button').style.border = 'solid';
+            const chekbord = localStorage.getItem('widgetborlinkColor');
+            document.querySelector('.add-widget-button').style.border = `solid ${chekbord}`;
+            
+            } else {
+                borderhide.style.display = 'none';
+                document.querySelector('.add-widget-button').style.border = 'none';
+                
+            }
+            b0o = !b0o;
+    });
+
+    let b1o = false;
+
+border1.addEventListener('click', () => {
+    if (b1o) {
+        borderhide1.style.display = 'block';
+        const brdside = localStorage.getItem('bordersidelinkColor');
+        document.getElementById('homeButton').style.border = `solid ${brdside}`;
+        document.getElementById('newTabButton').style.border = `solid ${brdside}`;
+        document.getElementById('privateButton').style.border = `solid ${brdside}`;
+        document.getElementById('homeButton').style.border = `solid ${brdside}`;
+        document.getElementById('hyperb').style.border = `solid ${brdside}`;
+        document.getElementById('settings').style.border = `solid ${brdside}`;
+        document.getElementById('historyButton').style.border = `solid ${brdside}`;
+       
+        
+        } else {
+            document.getElementById('homeButton').style.border = 'none';
+            document.getElementById('newTabButton').style.border = 'none';
+            document.getElementById('privateButton').style.border = 'none';
+            document.getElementById('homeButton').style.border = 'none';
+            document.getElementById('hyperb').style.border = 'none';
+            document.getElementById('settings').style.border = 'none';
+            document.getElementById('historyButton').style.border = 'none';
+            borderhide1.style.display = 'none';
+            
+            
+        }
+        b1o = !b1o;
+}); 
+    window.addEventListener('load', () => {
+        document.getElementById("searchInput").focus();
+        
+    });
+
+    
+hyperbText.addEventListener('input', () => {
+    const hyperbTextValue = hyperbText.value;
+    localStorage.setItem('hyperbText', hyperbTextValue);
+    document.getElementById('hypertext').textContent = hyperbTextValue;
+});
+
+window.addEventListener('load', () => {
+    const hyperbTextValue = localStorage.getItem('hyperbText');
+    browserBackgrounds.style.backgroundColor = localStorage.getItem('menucbglinkColor') || 'black';
+    
+    if (hyperbTextValue) {
+        document.getElementById('hypertext').textContent = hyperbTextValue;
+        hyperbText.value = hyperbTextValue;
+    }
+});
+
+
+
+    
+
+
+  
+
+    menuToggle.addEventListener('click', () => {
+    // Toggle the side menu visibility
+    const isMenuOpen = sideMenu.classList.toggle('open');
+   
+    // Wenn das Menü geschlossen wird, entfernen wir die 'rotated'-Klasse
+    if (!isMenuOpen) {
+        menuToggle.classList.remove('rotated');
+    } else {
+        menuToggle.classList.add('rotated');
+    }
+});
+
+
+PasswordInput.addEventListener('input', () => {
+    const inPassword = PasswordInput.value;
+    localStorage.setItem('passwordd', inPassword);
+});
+
+window.addEventListener('load', () =>{
+    const checkPassword = localStorage.getItem('passwordd');
+    if (checkPassword) {
+        document.getElementById('PasswordInput').style.display = 'none';
+        document.getElementById('pInput').textContent = 'Password Change in Private mode!';
+    }
+    
+});
+
+//Fast Search 
+inputfseins.addEventListener('input', () => {
+    localStorage.setItem('inputfseins',inputfseins.value)
+    
+});
+
+urlfseins.addEventListener('input', () => {
+    localStorage.setItem('urlfseins',urlfseins.value)
+});
+
+inputfszwei.addEventListener('input', () => {
+    localStorage.setItem('inputfszwei',inputfszwei.value)
+});
+
+urlfszwei.addEventListener('input', () => {
+    localStorage.setItem('urlfszwei',urlfszwei.value)
+});
+
+inputfsdrei.addEventListener('input', () => {
+    localStorage.setItem('inputfsdrei',inputfsdrei.value)
+});
+
+urlfsdrei.addEventListener('input', () => {
+    localStorage.setItem('urlfsdrei',urlfsdrei.value)
+});
+
+inputfsvier.addEventListener('input', () => {
+    localStorage.setItem('inputfsvier',inputfsvier.value)
+});
+
+urlfsvier.addEventListener('input', () => {
+    localStorage.setItem('urlfsvier',urlfsvier.value)
+});
+
+inputfsfunf.addEventListener('input', () => {
+    localStorage.setItem('inputfsfunf',inputfsfunf.value)
+});
+
+urlfsfunf.addEventListener('input', () => {
+    localStorage.setItem('urlfsfunf',urlfsfunf.value)
+});
+
+inputfssechs.addEventListener('input', () => {
+    localStorage.setItem('inputfssechs',inputfssechs.value)
+});
+
+urlfssechs.addEventListener('input', () => {
+    localStorage.setItem('urlfssechs',urlfssechs.value)
+});
+
+inputfssieben.addEventListener('input', () => {
+    localStorage.setItem('inputfssieben',inputfssieben.value)
+});
+
+urlfssieben.addEventListener('input', () => {
+    localStorage.setItem('urlfssieben',urlfssieben.value)
+});
+
+inputfsacht.addEventListener('input', () => {
+    localStorage.setItem('inputfsacht',inputfsacht.value)
+});
+
+urlfsacht.addEventListener('input', () => {
+    localStorage.setItem('urlfsacht',urlfsacht.value)
+});
+
+inputfsneun.addEventListener('input', () => {
+    localStorage.setItem('inputfsneun',inputfsneun.value)
+});
+
+urlfsneun.addEventListener('input', () => {
+    localStorage.setItem('urlfsneun',urlfsneun.value)
+});
+
+inputfszehn.addEventListener('input', () => {
+    localStorage.setItem('inputfszehn',inputfszehn.value)
+});
+
+urlfszehn.addEventListener('input', () => {
+    localStorage.setItem('urlfszehn',urlfszehn.value)
+});
+
+
+window.addEventListener('load', () => {
+    const numereins =localStorage.getItem('urlfseins')
+    if (numereins) {
+        const numernameeins = localStorage.getItem('inputfseins');
+        const urleinsname = localStorage.getItem('urlfseins');
+        document.getElementById('inputfseins').placeholder = numernameeins;
+        document.getElementById('urlfseins').placeholder = urleinsname;
+        
+    }
+    const numerzwei =localStorage.getItem('urlfszwei')
+    if (numerzwei) {
+        const numernamezwei = localStorage.getItem('inputfszwei');
+        const urlzweiname = localStorage.getItem('urlfszwei');
+        document.getElementById('inputfszwei').placeholder = numernamezwei;
+        document.getElementById('urlfszwei').placeholder = urlzweiname;
+    }
+    const numerdrei =localStorage.getItem('urlfsdrei')
+    if (numerdrei) {
+        const numernamedrei = localStorage.getItem('inputfsdrei');
+        const urldreiname = localStorage.getItem('urlfsdrei');
+        document.getElementById('inputfsdrei').placeholder = numernamedrei;
+        document.getElementById('urlfsdrei').placeholder = urldreiname;
+    }
+    const numervier =localStorage.getItem('urlfsvier')
+    if (numervier) {
+        const numernamevier = localStorage.getItem('inputfsvier');
+        const urlviername = localStorage.getItem('urlfsvier');
+        document.getElementById('inputfsvier').placeholder = numernamevier;
+        document.getElementById('urlfsvier').placeholder = urlviername;
+    }
+    const numerfunf =localStorage.getItem('urlfsfunf')
+    if (numerfunf) {
+        const numernamefunf = localStorage.getItem('inputfsfunf');
+        const urlfunfname = localStorage.getItem('urlfsfunf');
+        document.getElementById('inputfsfunf').placeholder = numernamefunf;
+        document.getElementById('urlfsfunf').placeholder = urlfunfname;
+    }
+    const numersechs =localStorage.getItem('urlfssechs')
+    if (numersechs) {
+        const numernamesechs = localStorage.getItem('inputfssechs');
+        const urlsechsname = localStorage.getItem('urlfssechs');
+        document.getElementById('inputfssechs').placeholder = numernamesechs;
+        document.getElementById('urlfssechs').placeholder = urlsechsname;
+    }
+    const numersieben =localStorage.getItem('urlfssieben')
+    if (numersieben) {
+        const numernamesieben = localStorage.getItem('inputfssieben');
+        const urlsiebenname = localStorage.getItem('urlfssieben');
+        document.getElementById('inputfssieben').placeholder = numernamesieben;
+        document.getElementById('urlfssieben').placeholder = urlsiebenname;
+    }
+    const numeracht =localStorage.getItem('urlfsacht')
+    if (numeracht) {
+        const numernameacht = localStorage.getItem('inputfsacht');
+        const urlachtname = localStorage.getItem('urlfsacht');
+        document.getElementById('inputfsacht').placeholder = numernameacht;
+        document.getElementById('urlfsacht').placeholder = urlachtname;
+    }
+    const numerneun =localStorage.getItem('urlfsneun')
+    if (numerneun) {
+        const numernameneun = localStorage.getItem('inputfsneun');
+        const urlneunname = localStorage.getItem('urlfsneun');
+        document.getElementById('inputfsneun').placeholder = numernameneun;
+        document.getElementById('urlfsneun').placeholder = urlneunname;
+    }
+    const numerzehn =localStorage.getItem('urlfszehn')
+    if (numerzehn) {
+        const numernamezehn = localStorage.getItem('inputfszehn');
+        const urlzehnname = localStorage.getItem('urlfszehn');
+        document.getElementById('inputfsneun').placeholder = numernameneun;
+        document.getElementById('urlfszehn').placeholder = urlneunname;
+    }
+        
+    });
+
+
+
+searchInput.addEventListener('input', () =>{
+    const searchInputValue = searchInput.value;
+    const inputfsname = localStorage.getItem('inputfseins');
+    const inputfsnamezwei = localStorage.getItem('inputfszwei');
+    const inputfsnamedrei = localStorage.getItem('inputfsdrei');
+    const inputfsnamevier = localStorage.getItem('inputfsvier');
+    const inputfsnamefunf = localStorage.getItem('inputfsfunf');
+    const inputfsnamesechs = localStorage.getItem('inputfssechs');
+    const inputfsnamesieben = localStorage.getItem('inputfssieben');
+    const inputfsnameacht = localStorage.getItem('inputfsacht');
+    const inputfsnameneun = localStorage.getItem('inputfsneun');
+    const inputfsnamezehn = localStorage.getItem('inputfszehn');
+
+
+
+
+
+
+    if (searchInputValue === inputfsname) {
+        const urlfseinss = localStorage.getItem('urlfseins');
+        window.location.href = urlfseinss;
+    }
+    if (searchInputValue === inputfsnamezwei) {
+        const urlfssweii = localStorage.getItem('urlfszwei');
+        window.location.href = urlfssweii;
+    }
+    if (searchInputValue === inputfsnamedrei) {
+        const urlfsdreii = localStorage.getItem('urlfsdrei');
+        window.location.href = urlfsdreii;
+    }
+    if (searchInputValue === inputfsnamevier) {
+        const urlfsvierr = localStorage.getItem('urlfsvier');
+        window.location.href = urlfsvierr;
+    }
+    if (searchInputValue === inputfsnamefunf) {
+        const urlfsfunff = localStorage.getItem('urlfsfunf');
+        window.location.href = urlfsfunff;
+    }
+    if (searchInputValue === inputfsnamesechs) {
+        const urlfssechss = localStorage.getItem('urlfssechs');
+        window.location.href = urlfssechss;
+    }
+    if (searchInputValue === inputfsnamesieben) {
+        const urlfssiebenn = localStorage.getItem('urlfssieben');
+        window.location.href = urlfssiebenn;
+    }
+    if (searchInputValue === inputfsnameacht) {
+        const urlfsachtt = localStorage.getItem('urlfsacht');
+        window.location.href = urlfsachtt;
+    }
+    if (searchInputValue === inputfsnameneun) {
+        const urlfsneunn = localStorage.getItem('urlfsneun');
+        window.location.href = urlfsneunn;
+    }
+    if (searchInputValue === inputfsnamezehn) {
+        const urlfszehnn = localStorage.getItem('urlfszehn');
+        window.location.href = urlfszehnn;
+    }
+    
+
+
+})
+
+
+
+
+let setmenu = false;
+
+    settings.addEventListener('click', () => {
+        if (setmenu) {
+            favhidden.style.display = 'none';
+            } else {
+                favhidden.style.display = 'block';
+            }
+        setmenu = !setmenu;
+    });
+
+    homeButton.addEventListener('click', () => {
+        prmodus = false;
+        document.body.classList.remove('privatemode');
+        document.getElementById('h1prm').innerHTML = `<h1 id="h1prm""> </h1>`;
+        document.getElementById('hypertext').innerHTML = '<h1 style="font-family: \'Courier New\', Courier, monospace;font-size:100px;" id="hypertext">Hyper-B</h1>'
+        document.getElementById('searchInput').placeholder = "Search with Hyper-B..."
+        document.getElementById('sbutton').style.backgroundColor = '#1e3a8a'
+        document.getElementById('menuToggle').style.Color = '#1e3a8a'
+        privateButton.textContent = "Privat";
+        sideMenu.classList.remove('open');
+        document.getElementById('pInput').textContent = 'Password Change in Private mode!';
+        document.getElementById('PasswordInput').style.display = 'none';
+        document.getElementById('prfavbtn').style.display = 'none';
+        document.getElementById('addWidgetButtonTop').style.display = 'none';
+        document.querySelector('.widgetpr').style.display = 'none';
+
+
+
+
+       
+       
+       
+    });
+
+
+//bgsidemenu
+
+
+bgsidemenu.addEventListener('input', () => {
+    const bgsidemenuclr = bgsidemenu.value;
+    document.getElementById('homeButton').style.background = bgsidemenuclr;
+    document.getElementById('newTabButton').style.background = bgsidemenuclr;
+    document.getElementById('privateButton').style.background = bgsidemenuclr;
+    document.getElementById('homeButton').style.background = bgsidemenuclr;
+    document.getElementById('hyperb').style.background = bgsidemenuclr;
+    document.getElementById('settings').style.background = bgsidemenuclr;
+    document.getElementById('historyButton').style.background = bgsidemenuclr;   
+
+    localStorage.setItem('bgsidemenulinkColor', bgsidemenuclr);
+    
+    });
+
+    window.addEventListener('load', () => {
+        const bgsidemenus = localStorage.getItem('bgsidemenulinkColor');
+        document.getElementById('homeButton').style.background = bgsidemenus;
+        document.getElementById('newTabButton').style.background = bgsidemenus;
+        document.getElementById('privateButton').style.background = bgsidemenus;
+        document.getElementById('homeButton').style.background = bgsidemenus;
+        document.getElementById('hyperb').style.background = bgsidemenus;
+        document.getElementById('settings').style.background = bgsidemenus;
+        document.getElementById('historyButton').style.background = bgsidemenus;   
+
+        
+    });
+
+
+//sidemenucolor
+
+sidemenucolor.addEventListener('input', () => {
+    const sidemenuclr = sidemenucolor.value;
+    document.getElementById('homeButton').style.color = sidemenuclr;
+    document.getElementById('newTabButton').style.color = sidemenuclr;
+    document.getElementById('privateButton').style.color = sidemenuclr;
+    document.getElementById('homeButton').style.color = sidemenuclr;
+    document.getElementById('hyperb').style.color = sidemenuclr;
+    document.getElementById('settings').style.color = sidemenuclr;
+    document.getElementById('historyButton').style.color = sidemenuclr;   
+
+    localStorage.setItem('sidemenulinkColor', sidemenuclr);
+    
+    });
+
+    window.addEventListener('load', () => {
+        const ssidemenu = localStorage.getItem('sidemenulinkColor');
+        document.getElementById('homeButton').style.color = ssidemenu;
+        document.getElementById('newTabButton').style.color = ssidemenu;
+        document.getElementById('privateButton').style.color = ssidemenu;
+        document.getElementById('homeButton').style.color = ssidemenu;
+        document.getElementById('hyperb').style.color = ssidemenu;
+        document.getElementById('settings').style.color = ssidemenu;
+        document.getElementById('historyButton').style.color = ssidemenu;   
+    });
+
+
+//colorbtnborder
+
+colorbtnborder.addEventListener('input', () => {
+    const colorborderside = colorbtnborder.value;
+    localStorage.setItem('bordersidelinkColor', colorborderside);
+    document.getElementById('homeButton').style.border = `solid ${colorborderside}`;
+    document.getElementById('newTabButton').style.border = `solid ${colorborderside}`;
+    document.getElementById('privateButton').style.border = `solid ${colorborderside}`;
+    document.getElementById('homeButton').style.border = `solid ${colorborderside}`;
+    document.getElementById('hyperb').style.border = `solid ${colorborderside}`;
+    document.getElementById('settings').style.border = `solid ${colorborderside}`;
+    document.getElementById('historyButton').style.border = `solid ${colorborderside}`;   
+    
+    });
+
+    window.addEventListener('load', () => {
+        const scolorborder = localStorage.getItem('bordersidelinkColor');
+        document.getElementById('homeButton').style.border = `solid ${scolorborder}`;
+        document.getElementById('newTabButton').style.border = `solid ${scolorborder}`;
+        document.getElementById('privateButton').style.border = `solid ${scolorborder}`;
+        document.getElementById('homeButton').style.border = `solid ${scolorborder}`;
+        document.getElementById('hyperb').style.border = `solid ${scolorborder}`;
+        document.getElementById('settings').style.border = `solid ${scolorborder}`;
+        document.getElementById('historyButton').style.border = `solid ${scolorborder}`; 
+        
+    });
+
+//colormenubtn
+
+colormenubtn.addEventListener('input', () => {
+    const menubtn = document.querySelector('.menu-toggle');
+    const menucolor = colormenubtn.value;
+    localStorage.setItem('menulinkColor', menucolor);
+    if (menubtn) {
+        menubtn.style.color = menucolor;
+    } else {
+        console.log("menubtn not found");
+    }
+    });
+
+    window.addEventListener('load', () => {
+        const smenubtn = localStorage.getItem('menulinkColor');
+        if (smenubtn) {
+            const menubtn = document.querySelector('.menu-toggle')
+            if (menubtn) {
+                menubtn.style.color = smenubtn;
+            }
+        }
+    });
+
+//addaprwid bg
+
+
+//addaprwid color
+
+//addawid
+
+addawid.addEventListener('input', () => {
+    const addbtn = document.querySelector('.add-widget-button');
+    const addwidcolor = addawid.value;
+    localStorage.setItem('addwidlinkColor', addwidcolor);
+    if (addbtn) {
+        addbtn.style.color = addwidcolor;
+    } else {
+        console.log("addwid not found");
+    }
+    });
+
+    window.addEventListener('load', () => {
+        const swidd = localStorage.getItem('addwidlinkColor');
+        if (swidd) {
+            const addawid = document.querySelector('.add-widget-button')
+            if (addawid) {
+                addawid.style.color = swidd;
+            }
+        }
+    });
+//addwidbor
+addwidbor.addEventListener('input', () => {
+    const addbtn = document.querySelector('.add-widget-button');
+    const addwidgetborder = addwidbor.value;
+    localStorage.setItem('widgetborlinkColor', addwidgetborder);
+    if (addbtn) {
+        addbtn.style.border = `solid ${addwidgetborder}`;
+    } else {
+        console.log("addwidbg not found");
+    }
+    });
+    window.addEventListener('load', () => {
+        const widgetbor = localStorage.getItem('widgetborlinkColor');
+        if (widgetbor) {
+            const addawid = document.querySelector('.add-widget-button')
+            if (addawid) {
+                addawid.style.border = `solid ${widgetbor}`;
+            }
+        }
+    });
+
+
+
+    
+
+//addwidbackground
+
+addwidbg.addEventListener('input', () => {
+    
+    const addbtn = document.querySelector('.add-widget-button');
+    const addwidcolorbg = addwidbg.value;
+    localStorage.setItem('addwidbglinkColor', addwidcolorbg);
+    if (addbtn) {
+        addbtn.style.background = addwidcolorbg;
+    } else {
+        console.log("addwidbg not found");
+    }
+    });
+
+    window.addEventListener('load', () => {
+        const swidbg = localStorage.getItem('addwidbglinkColor');
+        if (swidbg) {
+            const addawid = document.querySelector('.add-widget-button')
+            if (addawid) {
+                addawid.style.background = swidbg;
+            }
+        }
+    });
+
+//bgo
+    bgo.addEventListener('input', () => {
+    const bgos = document.body;
+    const bgocolor = bgo.value;
+    localStorage.setItem('bgolinkColor', bgocolor);
+    if (bgos) {
+        localStorage.setItem('upl', 'false')
+        localStorage.setItem('az', 'false')
+
+        bgos.style.background = `linear-gradient(135deg, #ffffff, ${bgocolor})`;
+    } else {
+        console.log("bgo not found");
+    }
+    });
+
+
+
+
+
+
+//sbbuttn
+
+sbbutton.addEventListener('input', () => {
+    const sbbut = document.querySelector('.search-button')
+    const sbbutcolor = sbbutton.value;
+    localStorage.setItem('sbbutlinkColor', sbbutcolor);
+    if (sbbut) {
+        sbbut.style.color = sbbutcolor;
+    } else {
+        console.log("sbbut not found");
+    }
+    });
+
+    window.addEventListener('load', () => {
+        const sbbutt = localStorage.getItem('sbbutlinkColor');
+        if (sbbutt) {
+            const sbbut = document.querySelector('.search-button')
+            if (sbbut) {
+                sbbut.style.color = sbbutt;
+            }
+        }
+    });
+
+//sbutton
+
+sbutton.addEventListener('input', () => {
+    const sbut = document.querySelector('.search-button')
+    const sbutcolor = sbutton.value;
+    localStorage.setItem('sbutlinkColor', sbutcolor);
+    if (sbut) {
+        sbut.style.background = sbutcolor;
+    } else {
+        console.log("sbut not found");
+    }
+    });
+
+    window.addEventListener('load', () => {
+        const sbutt = localStorage.getItem('sbutlinkColor');
+        if (sbutt) {
+            const sbut = document.querySelector('.search-button')
+            if (sbut) {
+                sbut.style.background = sbutt;
+            }
+        }
+    });
+
+
+//menuclrb
+
+menuclrbg.addEventListener('input', () => {
+    const menuccbg = document.querySelector('.side-menu');
+    const colromenubg = menuclrbg.value;
+    localStorage.setItem('menucbglinkColor', colromenubg);
+    if (menuccbg) {
+        menuccbg.style.background = colromenubg;
+    } else {
+        console.log("unden");
+    }
+});
+
+window.addEventListener('load', () => {
+    const smenuclrbg = localStorage.getItem('menucbglinkColor');
+    if (smenuclrbg) {
+        const menuccbg = document.querySelector('.side-menu');
+        if (menuccbg) {
+            menuccbg.style.background = smenuclrbg;
+        }
+    } 
+});
+
+//menuclr
+
+menuclr.addEventListener('input', () => {
+    const menucc = document.querySelector('.side-menu');
+    const colromenu = menuclr.value;
+    localStorage.setItem('menuclinkColor', colromenu);
+    if (menucc) {
+        menucc.style.color = colromenu;
+    } else {
+        console.log("unden");
+    }
+});
+
+window.addEventListener('load', () => {
+    const smenuclr = localStorage.getItem('menuclinkColor');
+    if (smenuclr) {
+        const menucc = document.querySelector('.side-menu');
+        if (menucc) {
+            menucc.style.color = smenuclr;
+        }
+    } 
+});
+
+//Search box text color
+
+stextcolor.addEventListener('input', () => {
+    const stext = document.querySelector('h1');
+    const scolorValue = stextcolor.value;
+    localStorage.setItem('slinkColor', scolorValue);
+    if (stext) {
+        stext.style.color = scolorValue;
+    } else {
+        console.log("unden");
+    }
+});
+
+window.addEventListener('load', () => {
+    const ssavedColor = localStorage.getItem('slinkColor');
+    if (ssavedColor) {
+        const stext = document.querySelector('h1');
+        if (stext) {
+            stext.style.color = ssavedColor;
+        }
+    } 
+});
+
+//Search box BK Color
+
+    sboxcolor.addEventListener('input', () => {
+    const sbwid = document.querySelector('.search-container');
+    const sbcolorValue = sboxcolor.value;
+
+    // Speichern der Farbe im localStorage
+    localStorage.setItem('sblinkColor', sbcolorValue);
+
+    if (sbwid) {
+        // Anwenden der Farbe auf das Widget
+        sbwid.style.backgroundColor = sbcolorValue;
+    } else {
+        console.log("sbox nicht gefunden");
+    }
+});
+
+window.addEventListener('load', () => {
+    const sbsavedColor = localStorage.getItem('sblinkColor'); // gespeicherte Farbe aus localStorage holen
+    if (sbsavedColor) {
+        const sbwid = document.querySelector('.search-container');
+        if (sbwid) {
+           
+            sbwid.style.backgroundColor = sbsavedColor;
+        }
+    }
+});
+
+// Widget BK COLOR
+backcolorInput.addEventListener('input', () => {
+    const bwid = document.querySelector('.widget');
+    const bcolorValue = backcolorInput.value;
+
+    // Speichern der Farbe im localStorage
+    localStorage.setItem('blinkColor', bcolorValue);
+
+    if (bwid) {
+        // Anwenden der Farbe auf das Widget
+        bwid.style.backgroundColor = bcolorValue;
+        
+        
+    } else {
+        console.log("Widget nicht gefunden");
+    }
+});
+
+window.addEventListener('load', () => {
+    const bsavedColor = localStorage.getItem('blinkColor'); 
+    if (bsavedColor) {
+        const bwid = document.querySelector('.widget');
+        if (bwid) {
+           
+            bwid.style.backgroundColor = bsavedColor;
+        }
+    }
+});
+
+
+// WIdget Farbe
+colorInput.addEventListener('input', () => {
+    const wid = document.querySelector('.widget a');
+    const colorValue = colorInput.value; // Den Farbwert des Inputs holen
+
+    // Speichern der Farbe im localStorage
+    localStorage.setItem('linkColor', colorValue);
+
+    if (wid) {
+        // Anwenden der Farbe auf das Widget
+        wid.style.color = colorValue;
+        
+    } else {
+        console.log("Widget nicht gefunden");
+    }
+});
+
+// Beim Laden der Seite die gespeicherte Farbe anwenden
+window.addEventListener('load', () => {
+    const savedColor = localStorage.getItem('linkColor'); // gespeicherte Farbe aus localStorage holen
+    if (savedColor) {
+        const wid = document.querySelector('.widget a');
+        if (wid) {
+            // Die gespeicherte Farbe anwenden, falls sie existiert
+            wid.style.color = savedColor;
+        }
+    }
+});
+
+const widgetsa = document.querySelectorAll('.widget a');
+
+
+    
+    
+
+
+
+
+
+   
+
+   
+   
+
+
+// Klicke auf einen Menüpunkt, um das Menü zu schließen und die Animation zurückzusetzen
+homeButton.addEventListener('click', () => {
+    overlay.style.display = 'none';
+    
+    closeMenu();
+   
+});
+
+newTabButton.addEventListener('click', () => {
+    overlay.style.display = 'none';
+    closeMenu();
+});
+
+privateButton.addEventListener('click', () => {
+    overlay.style.display = 'none';
+    closeMenu();
+});
+
+
+
+// Hilfsfunktion, um das Menü zu schließen und die Animation zurückzusetzen
+function closeMenu() {
+    sideMenu.classList.remove('open'); // Menü schließen
+    menuToggle.classList.remove('rotated'); // Button zurückdrehen
+}
+function openMenuSide() {
+    sideMenu.classList.add('open'); // Menü öffnen
+    menuToggle.classList.add('rotated'); // Button drehen
+}
+
+
+
+
+
+   
+
+   
+
+   
+    privateButton.addEventListener('click', () => {
+        correctPassword = localStorage.getItem("passwordd")
+        const userPassword = prompt('Enter Password:');
+
+        if (userPassword === correctPassword) {
+            window.location.href = 'Private.html';
+  
+        } else {
+           
+        }
+
+    });
+
+    function shiftn() {
+        window.open(window.location.href, '_blank');
+
+    };
+   
+   
+   
+
+   
+
+    document.addEventListener("keydown", function(event) {
+      if (event.altKey && event.key.toLowerCase() === "n") {
+        shiftn();
+      }
+    });
+
+
+
+    newTabButton.addEventListener('click', () => {
+        // Öffne die aktuelle URL im neuen Tab (Startseite)
+        window.open(window.location.href, '_blank');
+        sideMenu.classList.remove('open');
+    });
+
+    historyButton.addEventListener('click', () => {
+        historyMenu.style.display = (historyMenu.style.display === 'block') ? 'none' : 'block';
+        clearHistoryButton.style.display = historyMenu.style.display === 'block' ? 'block' : 'none'; // Button nur anzeigen, wenn History sichtbar
+        if (historyMenu.style.display === 'block') {
+            historyMenu.style.opacity = '1'; // Zeigt die Liste mit Animation an
+            if (searchHistory.length > 0) {
+                historyMenu.innerHTML = '';
+                searchHistory.forEach((query, index) => {
+                    const historyItem = document.createElement('div');
+                    historyItem.classList.add('history-item');
+                    historyItem.textContent = query;
+
+                    // Klick auf Historie zum Öffnen
+                    historyItem.addEventListener('click', () => {
+                        if (query.match(/^(https?:\/\/)/)) {
+                            window.location.href = query;
+                        } else {
+                            window.location.href = 'https://www.google.com/search?q=' + encodeURIComponent(query);
+                        }
+                    });
+
+                 
+
+                    // Löschen Button hinzufügen
+                    const deleteButton = document.createElement('button');
+                    deleteButton.classList.add('delete-btn');
+                    deleteButton.textContent = 'X';
+                    deleteButton.addEventListener('click', (e) => {
+                        e.stopPropagation(); // Verhindert das Öffnen der URL beim Klicken auf das Löschen
+                        searchHistory.splice(index, 1);
+                        localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+                        historyItem.remove();
+                    });
+
+                    historyItem.appendChild(deleteButton);
+                    historyMenu.appendChild(historyItem);
+                });
+            }
+        }
+    });
+
+    clearHistoryButton.addEventListener('click', () => {
+        searchHistory = [];
+        localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+        historyMenu.innerHTML = ''; // Löscht die Historie aus dem HTML
+        historyMenu.style.display = 'none';
+        clearHistoryButton.style.display = 'none'; // Versteckt den Button
+    });
+
+    const form = document.getElementById('urlForm');
+
+
+    form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    let query = searchInput.value.trim();
+
+    if (query) {
+        // Wenn es wie eine Domain aussieht, aber kein http enthält, füge https:// hinzu
+        const domainRegex = /^[a-z0-9.-]+\.[a-z]{2,}$/i;
+        if (query.match(domainRegex) && !query.startsWith('http')) {
+            query = 'https://' + query;
+        }
+
+        if (query.match(/^(https?:\/\/)/)) {
+            window.location.href = query; // Gehe direkt zur URL
+        } else {
+            
+            if (query.startsWith("w-")) {
+            wItem = query.substring(2); 
+            window.location.href = 'https://de.wikipedia.org/wiki/' + wItem;
+            }else {
+                if (query.startsWith("y-")) {
+                sItem = query.substring(2); 
+                    window.location.href = 'https://www.youtube.com/results?search_query=' + sItem;
+                }else {
+                    window.location.href = 'https://www.google.com/search?q=' + encodeURIComponent(query); // Google-Suche
+            }
+                }
+            
+        }
+
+        // Füge die Anfrage zur Historie hinzu
+        if (!searchHistory.includes(query)) {
+            if (prmodus) {
+                
+            } else {
+            searchHistory.unshift(query); // Neue Anfrage am Anfang der Liste
+            localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+            }}
+    }
+
+    searchInput.value = '';
+});
+
+const addWidgetButton = document.getElementById('addWidgetButton');
+    const widgetContainer = document.getElementById('widgetContainer');
+
+    // Funktion, um ein Widget zu erstellen
+    function createWidget(url, name) {
+        const widget = document.createElement('div');
+        widget.classList.add('widget');
+        widget.style.zIndex = 10;
+
+        const savedBackgroundColor = localStorage.getItem('blinkColor');
+            if (savedBackgroundColor) {
+                widget.style.backgroundColor = savedBackgroundColor;  // Die gespeicherte Hintergrundfarbe anwenden
+            }
+
+        const link = document.createElement('a');
+        link.href = url;
+        link.textContent = name;  // Name des Widgets anstelle der URL
+        link.target = "_blank"; // Öffnet die URL in einem neuen Tab
+        const savedColor = localStorage.getItem('linkColor');
+        if (savedColor) {
+            link.style.color = savedColor;  // Falls eine Farbe gespeichert wurde, setze sie auf den Link
+        }
+        const bsavedColor = localStorage.getItem('blinkColor');
+       
+         
+
+
+
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = ''; // Löschen-Button (du kannst das Aussehen anpassen)
+        deleteButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            widget.remove(); // Entfernt das Widget aus der Anzeige
+            removeWidgetFromLocalStorage(url, name); // Entfernt das Widget aus dem localStorage
+        });
+
+        widget.appendChild(link);
+        widget.appendChild(deleteButton);
+        widgetContainer.appendChild(widget);
+    }
+
+    // Widgets aus dem localStorage laden
+    function loadWidgets() {
+        const widgets = JSON.parse(localStorage.getItem('widgets')) || []; // Lade gespeicherte Widgets oder setze leeres Array
+        widgets.forEach(widget => {
+            createWidget(widget.url, widget.name); // Jedes Widget erstellen
+        });
+    }
+
+    // Widget aus dem localStorage entfernen
+    function removeWidgetFromLocalStorage(url, name) {
+        let widgets = JSON.parse(localStorage.getItem('widgets')) || [];
+        widgets = widgets.filter(widget => widget.url !== url || widget.name !== name); // Filtere das zu löschende Widget
+        localStorage.setItem('widgets', JSON.stringify(widgets)); // Speichere die aktualisierte Liste
+    }
+
+    // Beim Klicken des "+" Buttons erscheint das Widget zum Eingeben der URL und des Namens
+    addWidgetButton.addEventListener('click', () => {
+        const url = prompt('Enter the URL you want to save:');
+        const name = prompt('Enter a nickname for the URL:');
+       
+        if (url && name) {
+            // Füge die URL und den Namen als Widget hinzu
+            createWidget(url, name);
+
+            // Speichere das neue Widget im localStorage
+            let widgets = JSON.parse(localStorage.getItem('widgets')) || [];
+            widgets.push({ url, name }); // Füge das neue Widget zur Liste hinzu
+            localStorage.setItem('widgets', JSON.stringify(widgets)); // Speichere die Liste im localStorage
+        }
+    });
+
+    // Widgets beim Laden der Seite wiederherstellen
+    window.addEventListener('load', loadWidgets);
+
+
+//Privtae widgets
+
+
+
+   
+
+//------------------------
+
+    hyperb.addEventListener('click',() => {
+        overlay.style.display = 'block';
+    });
+
+
+   
+
+    const img = document.getElementById('img');
+// Background Loader
+    window.addEventListener('DOMContentLoaded', () =>{
+        const savedBackground = localStorage.getItem('backgroundImage');
+        if (savedBackground) {
+            const ax =localStorage.getItem('upl')
+            if(ax === 'true') {
+               
+                document.body.style.backgroundImage = `url(${savedBackground})`;
+                
+                } else {
+                    const ssbgo = localStorage.getItem('bgolinkColor');
+                document.body.style.background = `linear-gradient(135deg, #ffffff, ${ssbgo})`;
+            };
+            if (ax === 'false') {
+                const az = localStorage.getItem('az');
+                
+                if (az === 'true') {
+                    const imgurrl = localStorage.getItem('imageUrlBG');
+                    document.body.style.backgroundImage = `url(${imgurrl})`;
+            
+                } else {
+                    const ssbgo = localStorage.getItem('bgolinkColor');
+                document.body.style.background = `linear-gradient(135deg, #ffffff, ${ssbgo})`;
+
+                };
+
+            };
+            
+           
+        } else {
+            const ssbgo = localStorage.getItem('bgolinkColor');
+            document.body.style.background = `linear-gradient(135deg, #ffffff, ${ssbgo})`;        }
+    });
+    
+
+    img.addEventListener('change', function() {
+    const file = this.files[0];
+    if (file && file.type.startsWith('image/')) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            const imageUrl = e.target.result; // Base64 URL
+            const fileUrl = URL.createObjectURL(file); // file:// URL
+            
+            document.body.style.backgroundImage = `url('${imageUrl}')`;
+            localStorage.setItem('backgroundImage', imageUrl);
+            localStorage.setItem('backgroundImageFile', fileUrl); // file:// URL speichern
+            localStorage.setItem('upl', 'true');
+            
+            console.log('Base64 URL:', imageUrl);
+            console.log('File URL:', fileUrl);
+            
+            location.reload();
+        };
+
+        reader.readAsDataURL(file);
+    }
+});
+
+bg1.addEventListener('contextmenu', () => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    
+    input.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file && file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            
+            reader.onload = function (e) {
+            const imageUrl = e.target.result; // Base64 URL
+            const fileUrl = URL.createObjectURL(file); // file:// URL
+            
+            document.body.style.backgroundImage = `url('${imageUrl}')`;
+            localStorage.setItem('backgroundImage', imageUrl);
+            localStorage.setItem('backgroundImage0', imageUrl);
+            localStorage.setItem('backgroundImageFile', fileUrl); // file:// URL speichern
+            localStorage.setItem('upl', 'true');
+            
+            console.log('Base64 URL:', imageUrl);
+            console.log('File URL:', fileUrl);
+            
+            location.reload();
+            };
+            
+            reader.readAsDataURL(file);
+        }
+    });
+    input.addEventListener('change',() => {
+        bg1.style.backgroundImage = `url('${localStorage.getItem('backgroundImage0')}')`;
+        const changeIMg1 = localStorage.getItem('backgroundImage1');
+        localStorage.setItem('backgroundImage', changeIMg1);
+        
+        bg1.style.backgroundImage = `url('${changeIMg1}')`;
+        location.reload();
+        
+
+        
+        
+        
+    })
+    
+    input.click();
+});
+
+bg2.addEventListener('contextmenu', () => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    
+    input.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file && file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            
+            reader.onload = function (e) {
+            const imageUrl = e.target.result; // Base64 URL
+            const fileUrl = URL.createObjectURL(file); // file:// URL
+            
+            document.body.style.backgroundImage = `url('${imageUrl}')`;
+            localStorage.setItem('backgroundImage1', imageUrl);
+           
+            localStorage.setItem('upl', 'true');
+            
+            console.log('Base64 URL:', imageUrl);
+            console.log('File URL:', fileUrl);
+            
+            location.reload();
+            };
+            
+            reader.readAsDataURL(file);
+        }
+    });
+    input.addEventListener('change',() => {
+        bg2.style.backgroundImage = `url('${localStorage.getItem('backgroundImage1')}')`;
+        
+        const changeIMg1 = localStorage.getItem('backgroundImage1');
+        localStorage.setItem('backgroundImage', changeIMg1);
+        
+        bg2.style.backgroundImage = `url('${changeIMg1}')`;
+        location.reload();
+        
+        
+        
+    })
+    
+    input.click();
+});
+
+bg3.addEventListener('contextmenu', () => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    
+    input.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file && file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            
+            reader.onload = function (e) {
+            const imageUrl = e.target.result; // Base64 URL
+            const fileUrl = URL.createObjectURL(file); // file:// URL
+            
+            document.body.style.backgroundImage = `url('${imageUrl}')`;
+            localStorage.setItem('backgroundImage3', imageUrl);
+           
+            localStorage.setItem('upl', 'true');
+            
+            console.log('Base64 URL:', imageUrl);
+            console.log('File URL:', fileUrl);
+            
+            location.reload();
+            };
+            
+            reader.readAsDataURL(file);
+        }
+    });
+    input.addEventListener('change',() => {
+        bg3.style.backgroundImage = `url('${localStorage.getItem('backgroundImage3')}')`;
+        
+        const changeIMg1 = localStorage.getItem('backgroundImage3');
+        localStorage.setItem('backgroundImage', changeIMg1);
+        
+        bg3.style.backgroundImage = `url('${changeIMg1}')`;
+        location.reload();
+        
+        
+        
+    })
+    
+    input.click();
+});
+
+bg4.addEventListener('contextmenu', () => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    
+    input.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file && file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            
+            reader.onload = function (e) {
+            const imageUrl = e.target.result; // Base64 URL
+            const fileUrl = URL.createObjectURL(file); // file:// URL
+            
+            document.body.style.backgroundImage = `url('${imageUrl}')`;
+            localStorage.setItem('backgroundImage4', imageUrl);
+           
+            localStorage.setItem('upl', 'true');
+            
+          
+            
+            location.reload();
+            };
+            
+            reader.readAsDataURL(file);
+        }
+    });
+    input.addEventListener('change',() => {
+        bg4.style.backgroundImage = `url('${localStorage.getItem('backgroundImage4')}')`;
+        
+        const changeIMg1 = localStorage.getItem('backgroundImage4');
+        localStorage.setItem('backgroundImage', changeIMg1);
+        
+        bg4.style.backgroundImage = `url('${changeIMg1}')`;
+        location.reload();
+    
+    })
+    
+    input.click();
+});
+
+bg5.addEventListener('contextmenu', () => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    
+    input.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file && file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            
+            reader.onload = function (e) {
+            const imageUrl = e.target.result; // Base64 URL
+            const fileUrl = URL.createObjectURL(file); // file:// URL
+            
+            document.body.style.backgroundImage = `url('${imageUrl}')`;
+            localStorage.setItem('backgroundImage5', imageUrl);
+           
+            localStorage.setItem('upl', 'true');
+            
+            
+            location.reload();
+            };
+            
+            reader.readAsDataURL(file);
+        }
+    });
+    input.addEventListener('change',() => {
+        bg5.style.backgroundImage = `url('${localStorage.getItem('backgroundImage5')}')`;
+
+        const changeIMg1 = localStorage.getItem('backgroundImage5');
+        localStorage.setItem('backgroundImage', changeIMg1);
+
+        bg5.style.backgroundImage = `url('${changeIMg1}')`;
+        location.reload();
+    
+    })
+    
+    input.click();
+});
+
+bg1.addEventListener('click', () => {
+    const bg1Image = localStorage.getItem('backgroundImage0');
+    localStorage.setItem('backgroundImage', bg1Image);
+    location.reload();
+});
+bg2.addEventListener('click', () => {
+    const bg2Image = localStorage.getItem('backgroundImage1');
+    localStorage.setItem('backgroundImage', bg2Image);
+    location.reload();
+});
+bg3.addEventListener('click', () => {
+    const bg3Image = localStorage.getItem('backgroundImage3');
+    localStorage.setItem('backgroundImage', bg3Image);
+    location.reload();
+    
+});
+bg4.addEventListener('click', () => {
+    const bg4Image = localStorage.getItem('backgroundImage4');
+    localStorage.setItem('backgroundImage', bg4Image);
+    location.reload();
+    
+});
+bg5.addEventListener('click', () => {
+    const bg5Image = localStorage.getItem('backgroundImage5');
+    localStorage.setItem('backgroundImage', bg5Image);
+    location.reload();
+    
+});
+bg1InputText.addEventListener('input', () => {
+    const bg1Text = bg1InputText.value;
+    localStorage.setItem('backgroundImage0Text', bg1Text);
+});
+bg2InputText.addEventListener('input', () => {
+    const bg2Text = bg2InputText.value;
+    localStorage.setItem('backgroundImage1Text', bg2Text);
+});
+bg3InputText.addEventListener('input', () => {
+    const bg3Text = bg3InputText.value;
+    localStorage.setItem('backgroundImage2Text', bg3Text);
+});
+bg4InputText.addEventListener('input', () => {
+    const bg4Text = bg4InputText.value;
+    localStorage.setItem('backgroundImage3Text', bg4Text);
+});
+bg5InputText.addEventListener('input', () => {
+    const bg5Text = bg5InputText.value;
+    localStorage.setItem('backgroundImage4Text', bg5Text);
+});
+    window.addEventListener('load', () => {
+        bg1InputText.value = localStorage.getItem('backgroundImage0Text') || 'Background 1';
+        bg2InputText.value = localStorage.getItem('backgroundImage1Text') || 'Background 2';
+        bg3InputText.value = localStorage.getItem('backgroundImage2Text') || 'Background 3';
+        bg4InputText.value = localStorage.getItem('backgroundImage3Text') || 'Background 4';
+        bg5InputText.value = localStorage.getItem('backgroundImage4Text') || 'Background 5';
+
+        bg1.style.backgroundImage = `url('${localStorage.getItem('backgroundImage0') ?? 'assets/addBtn.png'}')`;
+        bg1.style.backgroundSize = 'cover';
+        bg1.style.backgroundPosition = 'center';
+        bg1.style.width = "300px";
+        bg1.style.height = "200px";
+        bg2.style.backgroundImage = `url('${localStorage.getItem('backgroundImage1') ?? 'assets/addBtn.png'}')`; 
+        bg2.style.backgroundSize = 'cover';
+        bg2.style.backgroundPosition = 'center';
+        bg2.style.width = "300px";
+        bg2.style.height = "200px";
+        bg3.style.backgroundImage = `url('${localStorage.getItem('backgroundImage3') ?? 'assets/addBtn.png'}')`; 
+        bg3.style.backgroundSize = 'cover';
+        bg3.style.backgroundPosition = 'center';
+        bg3.style.width = "300px";
+        bg3.style.height = "200px";
+        bg4.style.backgroundImage = `url('${localStorage.getItem('backgroundImage4') ?? 'assets/addBtn.png'}')`; 
+        bg4.style.backgroundSize = 'cover';
+        bg4.style.backgroundPosition = 'center';
+        bg4.style.width = "300px";
+        bg4.style.height = "200px";
+        bg5.style.backgroundImage = `url('${localStorage.getItem('backgroundImage5') ?? 'assets/addBtn.png'}')`;
+        bg5.style.backgroundSize = 'cover';
+        bg5.style.backgroundPosition = 'center';
+        bg5.style.width = "300px";
+        bg5.style.height = "200px";
+    });
+    
+
+   
+</script>
+</body>
+</html>
