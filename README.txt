@@ -6,7 +6,7 @@
 -You can copy yourself small sections, but make sure to credit us when sharing/uploading.
 🟥Not Allowed:
 -You are not allowed to use the code for your own projects and upload it as yours!
--You are also not allowed to share the code with other only with the Download page of Hyper-B!
+-You are also not allowed to share the code with other only with the Setup page of Hyper-B!
 
 ⬇️Setup
 1.Open in a browser your choice this link: https://ineverstopmewing.github.io/Hyper-B/
