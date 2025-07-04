@@ -9,7 +9,7 @@
 -You are also not allowed to share the code with other only with the Download page of Hyper-B!
 
 ⬇️Setup
-1.Open the file index.html in a browser your choice.
+1.Open in a browser your choice this link: https://ineverstopmewing.github.io/Hyper-B/
 2.Set as StartPage:
 -Chrome: Settings -> On startup -> Open a specific page or set of pages.
 -Firefox: Settings -> Home -> Custom URLs.
