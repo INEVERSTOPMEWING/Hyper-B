@@ -16,7 +16,6 @@
 -Edge: Settings -> Start, home, and new tabs -> Open these pages.
 
 🎮Usage
-
 Key Combination:
 -Alt + n | New tab
 -Shift + Space | Background Menuy
