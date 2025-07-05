@@ -837,7 +837,7 @@ mark {
 
 <div class="overlay">
     
-    <p>Current Version: 4.11</p>
+    
 
    
 </div>
@@ -1048,7 +1048,7 @@ mark {
         </div>
 
 
-        <p class="cv">Current Version: 4.11</p>
+        <p class="cv">Current Version: 4.11.1</p>
 
 
     </ul>
@@ -2903,7 +2903,10 @@ bg5InputText.addEventListener('input', () => {
         }
         if (localStorage.getItem('menucbglinkColor')) {
             const color = localStorage.getItem('menucbglinkColor');
-            document.querySelector('.menu1BG').style.backgroundColor = color; 
+            const colortext = localStorage.getItem('menuclinkColor');
+
+            document.querySelector('.menu1BG').style.backgroundColor = color;
+            document.querySelector('.menu1BG').style.color = colortext;
 
         }
             
