@@ -794,18 +794,50 @@ mark {
     text-align: center;
 }
 
+.menu1BG {
+    display: none;
+    position: absolute;
+      background: rgb(0, 0, 0);
+      border: 1px solid #252525;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      padding: 10px;
+      z-index: 1000;
+      border-radius: 8px;
+      color: rgb(158, 158, 158);
+}
 
+.menu1BG ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+}
+
+.menu1BG li {
+      padding: 5px 10px; 
+      cursor: pointer;
+}
+
+.menu1BG li:hover {
+      background-color: #ffffff31;
+      
+    }
 
 
     </style>
 </head>
 <body>
+<div id="menu1BG" class="menu1BG">
+  <ul>
+    <li id="clickBGImage">Image</li>
+    <li id="clickBGColor">Color</li>
 
+  </ul>
+</div>
 
 
 <div class="overlay">
     
-    <p>Current Version: 4.1</p>
+    <p>Current Version: 4.11</p>
 
    
 </div>
@@ -1016,7 +1048,7 @@ mark {
         </div>
 
 
-        <p class="cv">Current Version: 4.1</p>
+        <p class="cv">Current Version: 4.11</p>
 
 
     </ul>
@@ -1039,6 +1071,9 @@ mark {
 
 <script>
 let prmodus = false;
+const clickBGImage = document.getElementById('clickBGImage');
+const clickBGColor = document.getElementById('clickBGColor');
+const menu1BG = document.getElementById('menu1BG');
 const openMenuBtn = document.getElementById('openMenuBtn');
 const bg1InputText = document.getElementById('bg1InputText');
 const bg2InputText = document.getElementById('bg2InputText');
@@ -1553,7 +1588,7 @@ let setmenu = false;
         prmodus = false;
         document.body.classList.remove('privatemode');
         document.getElementById('h1prm').innerHTML = `<h1 id="h1prm""> </h1>`;
-        document.getElementById('hypertext').innerHTML = '<h1 style="font-family: \'Courier New\', Courier, monospace;font-size:100px;" id="hypertext">Hyper-B</h1>'
+        
         document.getElementById('searchInput').placeholder = "Search with Hyper-B..."
         document.getElementById('sbutton').style.backgroundColor = '#1e3a8a'
         document.getElementById('menuToggle').style.Color = '#1e3a8a'
@@ -2257,12 +2292,8 @@ const addWidgetButton = document.getElementById('addWidgetButton');
     });
 
 
-   
-
-    const img = document.getElementById('img');
-// Background Loader
-    window.addEventListener('DOMContentLoaded', () =>{
-        const savedBackground = localStorage.getItem('backgroundImage');
+function backgroundLoader() {
+    const savedBackground = localStorage.getItem('backgroundImage');
         if (savedBackground) {
             const ax =localStorage.getItem('upl')
             if(ax === 'true') {
@@ -2292,6 +2323,12 @@ const addWidgetButton = document.getElementById('addWidgetButton');
         } else {
             const ssbgo = localStorage.getItem('bgolinkColor');
             document.body.style.background = `linear-gradient(135deg, #ffffff, ${ssbgo})`;        }
+}
+
+    const img = document.getElementById('img');
+// Background Loader
+    window.addEventListener('DOMContentLoaded', () =>{
+        backgroundLoader();
     });
     
 
@@ -2318,59 +2355,63 @@ const addWidgetButton = document.getElementById('addWidgetButton');
         reader.readAsDataURL(file);
     }
 });
+document.addEventListener("click", function () {
+    menu1BG.style.display = "none";
+  });
 
-bg1.addEventListener('contextmenu', () => {
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.accept = 'image/*';
+clickBGImage.addEventListener('click', () => {
+    document.getElementById('BrowserBackGrounds').style.display = 'none';
+    if(localStorage.getItem('hintergrundpaint') === 'true') {
+        localStorage.setItem('hintergrundpaint', 'false');
+        localStorage.setItem('hintergrundColor', 'false');
+        
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = 'image/*';
     
-    input.addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        if (file && file.type.startsWith('image/')) {
-            const reader = new FileReader();
+        input.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
             
-            reader.onload = function (e) {
-            const imageUrl = e.target.result; // Base64 URL
-            const fileUrl = URL.createObjectURL(file); // file:// URL
+                reader.onload = function (e) {
+                const imageUrl = e.target.result; // Base64 URL
+                const fileUrl = URL.createObjectURL(file); // file:// URL
             
-            document.body.style.backgroundImage = `url('${imageUrl}')`;
-            localStorage.setItem('backgroundImage', imageUrl);
-            localStorage.setItem('backgroundImage0', imageUrl);
-            localStorage.setItem('backgroundImageFile', fileUrl); // file:// URL speichern
-            localStorage.setItem('upl', 'true');
+                document.body.style.backgroundImage = `url('${imageUrl}')`;
+                localStorage.setItem('backgroundImage', imageUrl);
+                localStorage.setItem('backgroundImage0', imageUrl);
+                localStorage.setItem('upl', 'true');
+                localStorage.setItem('bg1colorImage', "2")
             
-            console.log('Base64 URL:', imageUrl);
-            console.log('File URL:', fileUrl);
             
-            location.reload();
-            };
             
-            reader.readAsDataURL(file);
-        }
-    });
-    input.addEventListener('change',() => {
-        bg1.style.backgroundImage = `url('${localStorage.getItem('backgroundImage0')}')`;
-        const changeIMg1 = localStorage.getItem('backgroundImage1');
-        localStorage.setItem('backgroundImage', changeIMg1);
+                location.reload();
+                };
+            
+                reader.readAsDataURL(file);
+            }
+        });
+        input.addEventListener('change',() => {
+            bg1.style.backgroundImage = `url('${localStorage.getItem('backgroundImage0')}')`;
+            const changeIMg1 = localStorage.getItem('backgroundImage1');
+            localStorage.setItem('backgroundImage', changeIMg1);
         
-        bg1.style.backgroundImage = `url('${changeIMg1}')`;
-        location.reload();
-        
-
-        
-        
-        
+           bg1.style.backgroundImage = `url('${changeIMg1}')`;
+            location.reload();   
     })
-    
-    input.click();
-});
+input.click();
 
-bg2.addEventListener('contextmenu', () => {
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.accept = 'image/*';
+    }
+    if (localStorage.getItem('hintergrundpaint1' , 'false') === 'true') {
+        localStorage.setItem('hintergrundpaint1', 'false');
+        localStorage.setItem('hintergrundColor1', 'false');
+        localStorage.setItem('bg2colorImage', "2")
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = 'image/*';
     
-    input.addEventListener('change', function(e) {
+        input.addEventListener('change', function(e) {
         const file = e.target.files[0];
         if (file && file.type.startsWith('image/')) {
             const reader = new FileReader();
@@ -2381,13 +2422,14 @@ bg2.addEventListener('contextmenu', () => {
             
             document.body.style.backgroundImage = `url('${imageUrl}')`;
             localStorage.setItem('backgroundImage1', imageUrl);
+            location.reload();
            
             localStorage.setItem('upl', 'true');
             
             console.log('Base64 URL:', imageUrl);
             console.log('File URL:', fileUrl);
             
-            location.reload();
+            
             };
             
             reader.readAsDataURL(file);
@@ -2400,16 +2442,20 @@ bg2.addEventListener('contextmenu', () => {
         localStorage.setItem('backgroundImage', changeIMg1);
         
         bg2.style.backgroundImage = `url('${changeIMg1}')`;
-        location.reload();
+
+        
         
         
         
     })
     
     input.click();
-});
 
-bg3.addEventListener('contextmenu', () => {
+    }
+    if (localStorage.getItem('hintergrundpaint2' , 'false') === 'true') {
+        localStorage.setItem('hintergrundpaint2', 'false');
+        localStorage.setItem('hintergrundColor2', 'false');
+        localStorage.setItem('bg3colorImage', "2")
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = 'image/*';
@@ -2451,10 +2497,15 @@ bg3.addEventListener('contextmenu', () => {
     })
     
     input.click();
-});
 
-bg4.addEventListener('contextmenu', () => {
-    const input = document.createElement('input');
+    }
+    if (localStorage.getItem('hintergrundpaint3' , 'false') === 'true') {
+        localStorage.setItem('hintergrundpaint3', 'false');
+        localStorage.setItem('hintergrundColor3', 'false');
+        localStorage.setItem('bg4colorImage', "2")
+
+        
+        const input = document.createElement('input');
     input.type = 'file';
     input.accept = 'image/*';
     
@@ -2492,10 +2543,13 @@ bg4.addEventListener('contextmenu', () => {
     })
     
     input.click();
-});
-
-bg5.addEventListener('contextmenu', () => {
-    const input = document.createElement('input');
+    
+    }
+    if (localStorage.getItem('hintergrundpaint4' , 'false') === 'true') {
+        localStorage.setItem('hintergrundpaint4', 'false');
+        localStorage.setItem('hintergrundColor4', 'false');
+        localStorage.setItem('bg5colorImage', "2")
+        const input = document.createElement('input');
     input.type = 'file';
     input.accept = 'image/*';
     
@@ -2532,33 +2586,230 @@ bg5.addEventListener('contextmenu', () => {
     })
     
     input.click();
+
+    }  
+});
+clickBGColor.addEventListener('click', () => {
+    document.getElementById('BrowserBackGrounds').style.display = 'none';
+    if (localStorage.getItem('hintergrundColor') === 'true') {
+        localStorage.setItem('hintergrundColor', 'false');
+        localStorage.setItem('hintergrundpaint', 'false');
+        const clrinput = document.createElement('input');
+        clrinput.type = 'color';
+        clrinput.click();
+        clrinput.addEventListener('input', function() {
+            const v = clrinput.value;
+            document.body.style.background = `linear-gradient(135deg, #ffffff, ${v})`;
+            bg1.style.background = `linear-gradient(135deg, #ffffff, ${v})`;
+            localStorage.setItem('bgolinkColor', v);
+            localStorage.setItem('upl', 'false');
+            localStorage.setItem('az', 'false');
+            localStorage.setItem('hintergrundCColor1', v);
+            localStorage.setItem('bg1colorImage', "1")
+        });
+    }
+    if (localStorage.getItem('hintergrundColor1') === 'true') {
+        localStorage.setItem('hintergrundColor1', 'false');
+        localStorage.setItem('hintergrundpaint1', 'false');
+        const clrinput = document.createElement('input');
+        clrinput.type = 'color';
+        clrinput.click();
+        clrinput.addEventListener('input', function() {
+            const v = clrinput.value;
+            document.body.style.background = `linear-gradient(135deg, #ffffff, ${v})`;
+            bg2.style.background = `linear-gradient(135deg, #ffffff, ${v})`;
+            localStorage.setItem('bgolinkColor', v);
+            localStorage.setItem('upl', 'false');
+            localStorage.setItem('az', 'false');
+            localStorage.setItem('hintergrundCColor2', v);
+            localStorage.setItem('bg2colorImage', "1")
+            
+        });
+    }
+    if (localStorage.getItem('hintergrundColor2') === 'true') {
+        localStorage.setItem('hintergrundColor2', 'false');
+        localStorage.setItem('hintergrundpaint2', 'false');
+        const clrinput = document.createElement('input');
+        clrinput.type = 'color';
+        clrinput.click();
+        clrinput.addEventListener('input', function() {
+            const v = clrinput.value;
+            document.body.style.background = `linear-gradient(135deg, #ffffff, ${v})`;
+            bg3.style.background = `linear-gradient(135deg, #ffffff, ${v})`;
+            localStorage.setItem('bgolinkColor', v);
+            localStorage.setItem('upl', 'false');
+            localStorage.setItem('az', 'false');
+            localStorage.setItem('hintergrundCColor3', v);
+            localStorage.setItem('bg3colorImage', "1")
+            
+        });
+    }
+    if (localStorage.getItem('hintergrundColor3') === 'true') {
+        localStorage.setItem('hintergrundColor3', 'false');
+        localStorage.setItem('hintergrundpaint3', 'false');
+        const clrinput = document.createElement('input');
+        clrinput.type = 'color';
+        clrinput.click();
+        clrinput.addEventListener('input', function() {
+            const v = clrinput.value;
+            document.body.style.background = `linear-gradient(135deg, #ffffff, ${v})`;
+            bg4.style.background = `linear-gradient(135deg, #ffffff, ${v})`;
+            localStorage.setItem('bgolinkColor', v);
+            localStorage.setItem('upl', 'false');
+            localStorage.setItem('az', 'false');
+            localStorage.setItem('hintergrundCColor4', v);
+            localStorage.setItem('bg4colorImage', "1")
+            
+        });
+    }
+    if (localStorage.getItem('hintergrundColor4') === 'true') {
+        localStorage.setItem('hintergrundColor4', 'false');
+        localStorage.setItem('hintergrundpaint4', 'false');
+        const clrinput = document.createElement('input');
+        clrinput.type = 'color';
+        clrinput.click();
+        clrinput.addEventListener('input', function() {
+            const v = clrinput.value;
+            document.body.style.background = `linear-gradient(135deg, #ffffff, ${v})`;
+            bg5.style.background = `linear-gradient(135deg, #ffffff, ${v})`;
+            localStorage.setItem('bgolinkColor', v);
+            localStorage.setItem('upl', 'false');
+            localStorage.setItem('az', 'false');
+            localStorage.setItem('hintergrundCColor5', v);
+            localStorage.setItem('bg5colorImage', "1")
+            
+        });
+    }
+
+});
+
+
+bg1.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+    menu1BG.style.left = e.pageX + "px";
+    menu1BG.style.top = e.pageY + "px";
+    menu1BG.style.display = "block";
+    localStorage.setItem('hintergrundpaint', 'true');
+    localStorage.setItem('hintergrundColor', 'true');
+
+
+});
+
+bg2.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+    menu1BG.style.left = e.pageX + "px";
+    menu1BG.style.top = e.pageY + "px";
+    menu1BG.style.display = "block";
+    localStorage.setItem('hintergrundpaint1', 'true');
+    localStorage.setItem('hintergrundColor1', 'true');
+    });
+
+bg3.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+    menu1BG.style.left = e.pageX + "px";
+    menu1BG.style.top = e.pageY + "px";
+    menu1BG.style.display = "block";
+    localStorage.setItem('hintergrundpaint2', 'true');
+    localStorage.setItem('hintergrundColor2', 'true');
+
+    
+});
+
+bg4.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+    menu1BG.style.left = e.pageX + "px";
+    menu1BG.style.top = e.pageY + "px";
+    menu1BG.style.display = "block";
+    localStorage.setItem('hintergrundpaint3', 'true');
+    localStorage.setItem('hintergrundColor3', 'true');
+
+});
+
+bg5.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+    menu1BG.style.left = e.pageX + "px";
+    menu1BG.style.top = e.pageY + "px";
+    menu1BG.style.display = "block";
+    localStorage.setItem('hintergrundpaint4', 'true');
+    localStorage.setItem('hintergrundColor4', 'true');
+
+    
 });
 
 bg1.addEventListener('click', () => {
-    const bg1Image = localStorage.getItem('backgroundImage0');
-    localStorage.setItem('backgroundImage', bg1Image);
+    if (localStorage.getItem('bg1colorImage') === '1') {
+        localStorage.setItem('upl', 'false');
+        const bg1Color= localStorage.getItem('hintergrundCColor1');
+        localStorage.setItem('bgolinkColor', bg1Color);
+        
+
+
+    }
+    if (localStorage.getItem('bg1colorImage') === '2') {
+        const bg1Image = localStorage.getItem('backgroundImage0');
+        localStorage.setItem('backgroundImage', bg1Image);
+        localStorage.setItem('upl', 'true')
+    }
+    
+   
     location.reload();
 });
 bg2.addEventListener('click', () => {
-    const bg2Image = localStorage.getItem('backgroundImage1');
-    localStorage.setItem('backgroundImage', bg2Image);
+    if (localStorage.getItem('bg2colorImage') === '1') {
+        localStorage.setItem('upl', 'false');
+        const bg1Color= localStorage.getItem('hintergrundCColor2');
+        localStorage.setItem('bgolinkColor', bg1Color);
+
+    }
+    if (localStorage.getItem('bg2colorImage') === '2') {
+        const bg1Image = localStorage.getItem('backgroundImage1');
+        localStorage.setItem('backgroundImage', bg1Image);
+        localStorage.setItem('upl', 'true')
+    }
     location.reload();
 });
 bg3.addEventListener('click', () => {
-    const bg3Image = localStorage.getItem('backgroundImage3');
-    localStorage.setItem('backgroundImage', bg3Image);
+    if (localStorage.getItem('bg3colorImage') === '1') {
+        localStorage.setItem('upl', 'false');
+        const bg1Color= localStorage.getItem('hintergrundCColor3');
+        localStorage.setItem('bgolinkColor', bg1Color);
+
+    }
+    if (localStorage.getItem('bg3colorImage') === '2') {
+        const bg1Image = localStorage.getItem('backgroundImage3');
+        localStorage.setItem('backgroundImage', bg1Image);
+        localStorage.setItem('upl', 'true')
+    }
     location.reload();
     
 });
 bg4.addEventListener('click', () => {
-    const bg4Image = localStorage.getItem('backgroundImage4');
-    localStorage.setItem('backgroundImage', bg4Image);
+    if (localStorage.getItem('bg4colorImage') === '1') {
+        localStorage.setItem('upl', 'false');
+        const bg1Color= localStorage.getItem('hintergrundCColor4');
+        localStorage.setItem('bgolinkColor', bg1Color);
+
+    }
+    if (localStorage.getItem('bg4colorImage') === '2') {
+        const bg1Image = localStorage.getItem('backgroundImage4');
+        localStorage.setItem('backgroundImage', bg1Image);
+        localStorage.setItem('upl', 'true')
+    }
     location.reload();
     
 });
 bg5.addEventListener('click', () => {
-    const bg5Image = localStorage.getItem('backgroundImage5');
-    localStorage.setItem('backgroundImage', bg5Image);
+    if (localStorage.getItem('bg5colorImage') === '1') {
+        localStorage.setItem('upl', 'false');
+        const bg1Color= localStorage.getItem('hintergrundCColor5');
+        localStorage.setItem('bgolinkColor', bg1Color);
+
+    }
+    if (localStorage.getItem('bg5colorImage') === '2') {
+        const bg1Image = localStorage.getItem('backgroundImage5');
+        localStorage.setItem('backgroundImage', bg1Image);
+        localStorage.setItem('upl', 'true')
+    }
     location.reload();
     
 });
@@ -2583,39 +2834,84 @@ bg5InputText.addEventListener('input', () => {
     localStorage.setItem('backgroundImage4Text', bg5Text);
 });
     window.addEventListener('load', () => {
+        localStorage.setItem('hintergrundpaint', 'false');
         bg1InputText.value = localStorage.getItem('backgroundImage0Text') || 'Background 1';
         bg2InputText.value = localStorage.getItem('backgroundImage1Text') || 'Background 2';
         bg3InputText.value = localStorage.getItem('backgroundImage2Text') || 'Background 3';
         bg4InputText.value = localStorage.getItem('backgroundImage3Text') || 'Background 4';
         bg5InputText.value = localStorage.getItem('backgroundImage4Text') || 'Background 5';
 
-        bg1.style.backgroundImage = `url('${localStorage.getItem('backgroundImage0') ?? 'assets/addBtn.png'}')`;
-        bg1.style.backgroundSize = 'cover';
-        bg1.style.backgroundPosition = 'center';
-        bg1.style.width = "300px";
-        bg1.style.height = "200px";
-        bg2.style.backgroundImage = `url('${localStorage.getItem('backgroundImage1') ?? 'assets/addBtn.png'}')`; 
-        bg2.style.backgroundSize = 'cover';
-        bg2.style.backgroundPosition = 'center';
-        bg2.style.width = "300px";
-        bg2.style.height = "200px";
-        bg3.style.backgroundImage = `url('${localStorage.getItem('backgroundImage3') ?? 'assets/addBtn.png'}')`; 
-        bg3.style.backgroundSize = 'cover';
-        bg3.style.backgroundPosition = 'center';
-        bg3.style.width = "300px";
-        bg3.style.height = "200px";
-        bg4.style.backgroundImage = `url('${localStorage.getItem('backgroundImage4') ?? 'assets/addBtn.png'}')`; 
-        bg4.style.backgroundSize = 'cover';
-        bg4.style.backgroundPosition = 'center';
-        bg4.style.width = "300px";
-        bg4.style.height = "200px";
-        bg5.style.backgroundImage = `url('${localStorage.getItem('backgroundImage5') ?? 'assets/addBtn.png'}')`;
-        bg5.style.backgroundSize = 'cover';
-        bg5.style.backgroundPosition = 'center';
-        bg5.style.width = "300px";
-        bg5.style.height = "200px";
+        //bgo unten
+        if (localStorage.getItem('bg1colorImage') === '1') {
+            bg1.style.background = `linear-gradient(135deg, #ffffff, ${localStorage.getItem('hintergrundCColor1')})`;
+        
+        }
+        if (localStorage.getItem('bg1colorImage') === '2') {
+            bg1.style.backgroundImage = `url('${localStorage.getItem('backgroundImage0') ?? 'assets/addBtn.png'}')`;
+            bg1.style.backgroundSize = 'cover';
+            bg1.style.backgroundPosition = 'center';
+            bg1.style.width = "300px";
+            bg1.style.height = "200px";
+        }
+        if (localStorage.getItem('bg2colorImage') === '1') {
+            bg2.style.background = `linear-gradient(135deg, #ffffff, ${localStorage.getItem('hintergrundCColor2')})`;
+            
+        
+        }
+        if (localStorage.getItem('bg2colorImage') === '2') {
+            bg2.style.backgroundImage = `url('${localStorage.getItem('backgroundImage1') ?? 'assets/addBtn.png'}')`;
+            bg2.style.backgroundSize = 'cover';
+            bg2.style.backgroundPosition = 'center';
+            bg2.style.width = "300px";
+            bg2.style.height = "200px";
+        }
+        if (localStorage.getItem('bg3colorImage') === '1') {
+            bg3.style.background = `linear-gradient(135deg, #ffffff, ${localStorage.getItem('hintergrundCColor3')})`;
+            
+        
+        }
+        if (localStorage.getItem('bg3colorImage') === '2') {
+            bg3.style.backgroundImage = `url('${localStorage.getItem('backgroundImage3') ?? 'assets/addBtn.png'}')`;
+            bg3.style.backgroundSize = 'cover';
+            bg3.style.backgroundPosition = 'center';
+            bg3.style.width = "300px";
+            bg3.style.height = "200px";
+        }
+        if (localStorage.getItem('bg4colorImage') === '1') {
+            bg4.style.background = `linear-gradient(135deg, #ffffff, ${localStorage.getItem('hintergrundCColor4')})`;
+            
+        
+        }
+        if (localStorage.getItem('bg4colorImage') === '2') {
+            bg4.style.backgroundImage = `url('${localStorage.getItem('backgroundImage4') ?? 'assets/addBtn.png'}')`;
+            bg4.style.backgroundSize = 'cover';
+            bg4.style.backgroundPosition = 'center';
+            bg4.style.width = "300px";
+            bg4.style.height = "200px";
+        }
+        if (localStorage.getItem('bg5colorImage') === '1') {
+            bg5.style.background = `linear-gradient(135deg, #ffffff, ${localStorage.getItem('hintergrundCColor5')})`;
+            
+        
+        }
+        if (localStorage.getItem('bg5colorImage') === '2') {
+            bg5.style.backgroundImage = `url('${localStorage.getItem('backgroundImage5') ?? 'assets/addBtn.png'}')`;
+            bg5.style.backgroundSize = 'cover';
+            bg5.style.backgroundPosition = 'center';
+            bg5.style.width = "300px";
+            bg5.style.height = "200px";
+        }
+        if (localStorage.getItem('menucbglinkColor')) {
+            const color = localStorage.getItem('menucbglinkColor');
+            document.querySelector('.menu1BG').style.backgroundColor = color; 
+
+        }
+            
+
     });
     
+    
+   
 
    
 </script>
