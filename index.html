@@ -24,7 +24,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #333;
+            color: #333;  
             overflow: hidden;
             
         }
@@ -825,11 +825,113 @@ mark {
       
     }
 
+.updateMenu {
+    display: none;
+    position: absolute; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 750px;
+    width: 700px;
+    background-color: white;
+    border-radius: 20px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    color: black;
+    font-family: 'Courier New', Courier, monospace;
+    }
+    .update-content {
+      flex-grow: 1;
+      background-color: #f9fafb;
+      border: 1px solid #e0e0e0;
+      border-radius: 12px;
+      padding: 20px;
+      font-size: 16px;
+      color: #444;
+      line-height: 1.6;
+      overflow-y: auto;
+      font-family: 'Courier New', Courier, monospace;
+      position: relative;
+      top: 290px;
+      left: 50%;
+      height: 540px;
+      width: 600px;
+      transform: translate(-50%, -50%);
+    }
+    .closebtn {
+        position: absolute;
+        right: 30px;
+        background: #f0f0f0;
+        border: 1px solid #e0e0e0;
+        border-radius: 50px;
+        height: 30px;
+        width: 100px;
+        font-size: 20px;
+        font-family: 'Courier New', Courier, monospace;
+
+    }
+    .closebtn:hover {
+        transform: scale(1.05);
+        background: #d1d1d1;
+
+    }
+    .dontshowagain {
+        position: absolute;
+        left: 30px;
+        background: #f0f0f0;
+        border: 1px solid #e0e0e0;
+        border-radius: 50px;
+        height: 30px;
+        width: 300px;
+        font-size: 20px;
+        font-family: 'Courier New', Courier, monospace;
+
+    }
+    .dontshowagain:hover {
+        transform: scale(1.05);
+        background: #d1d1d1;
+
+    }
+
 
     </style>
 </head>
 <body>
+<div class="updateMenu" id="updateMenuDiv">
+  <div>
+    <br >
+    <img src="https://ineverstopmewing.github.io/Hyper-B/logo.png" style="height: 64px; width: 64; position: fixed; right: 10px; top: 10px;">
+    <div style="font-size: 42px; font-weight: 700; text-align: center;">Update 4.11.2</div>
+    <div style="text-align: center;">Here's what's changed in the latest version:</div>
+    <br>
     
+    <div class="update-content">
+    <p style="font-size: 20px; font-family: 'Courier New', Courier, monospace; font-weight: 700; position: relative; left: 10px;">
+    Update:</p>
+    <p style="font-size: 18px; font-family: 'Courier New', Courier, monospace; font-weight: 400; position: relative; left: 10px;">
+    This update adds this screen which shows you what the last update is and what changed. 
+    You can always check the Update by clicking on the Current version in the side menu</p>
+    
+    <p style="font-size: 20px; font-family: 'Courier New', Courier, monospace; font-weight: 700; position: relative; left: 10px;">
+    Changes:</p>
+    <p style="font-size: 18px; font-family: 'Courier New', Courier, monospace; font-weight: 400; position: relative; left: 10px;">
+    - New Screen</p>
+
+      
+
+    </div>
+    <br>
+    <button class="closebtn" id="closebtn">Close</button>
+    <button class="dontshowagain" id="nevershow">Don't Show Again</button>
+
+
+  </div>
+
+  
+</div>
+
+
 <div id="menu1BG" class="menu1BG">
   <ul>
     <li id="clickBGImage">Image</li>
@@ -1052,7 +1154,8 @@ mark {
         </div>
 
 
-        <p class="cv">Current Version: 4.11.1</p>
+        <p class="cv" id="cvbtn">Current Version: 4.11.2</p>
+        
 
 
     </ul>
@@ -1075,6 +1178,9 @@ mark {
 
 <script>
 let prmodus = false;
+const cvbtn = document.getElementById('cvbtn');
+const nevershow = document.getElementById('nevershow');
+const closebtn = document.getElementById('closebtn');
 const clickBGImage = document.getElementById('clickBGImage');
 const clickBGColor = document.getElementById('clickBGColor');
 const menu1BG = document.getElementById('menu1BG');
@@ -1204,6 +1310,37 @@ document.addEventListener('keydown', function(event) {
         }
     }
 });
+
+    cvbtn.addEventListener('click', () => {
+        document.getElementById('updateMenuDiv').style.display = 'block';
+    });
+
+    closebtn.addEventListener('click', () => {
+        document.getElementById('updateMenuDiv').style.display = 'none';
+        localStorage.setItem('closed', 'true');
+    });
+    nevershow.addEventListener('click', () => {
+        document.getElementById('updateMenuDiv').style.display = 'none';
+        localStorage.setItem('nevershow', 'true');
+    });
+    
+
+//Update side
+    window.addEventListener('load', () => {
+        if (localStorage.getItem('nevershow') === 'true') {
+            document.getElementById('updateMenuDiv').style.display = 'none';
+        } else {
+            const closed = localStorage.getItem('closed');
+            if (!closed) {
+                document.getElementById('updateMenuDiv').style.display = 'block';
+            } else {
+                document.getElementById('updateMenuDiv').style.display = 'none';
+            }
+        }
+        
+
+    });
+    
 
     openMenuBtn.addEventListener('click', () => {
         // Toggle the visibility of the background menu
