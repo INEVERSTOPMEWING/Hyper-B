@@ -574,7 +574,7 @@
     border: none;
     border-radius: 80px;
     position: absolute;
-    top: 780px;
+    top: 890px;
     left: 235px;
     font-size: 25px;
 
@@ -610,7 +610,7 @@
     border: none;
     border-radius: 80px;
     position: absolute;
-    top: 680px;
+    top: 790px;
     left: 235px;
     font-size: 25px;
 
@@ -743,13 +743,19 @@ mark {
     width: 100%;
     height: 300px;
     
-    background: black center/cover;
+    background: rgb(255, 255, 255) center/cover;
     border: none;
     border-radius: 30px;
     cursor: pointer;
-    
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);    
     animation: fadeInUp 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    
+    /* Smooth Scrolling */
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
 }
+
 
 @keyframes fadeInUp {
     from {
@@ -825,6 +831,34 @@ mark {
       
     }
 
+.ListOfEngines {
+    position: absolute;
+    display: none;
+      background: rgb(78, 78, 78);
+      border: 1px solid #252525;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      padding: 10px;
+      z-index: 2000;
+      border-radius: 8px;
+      color: rgb(158, 158, 158);
+}
+
+.ListOfEngines ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+}
+
+.ListOfEngines li {
+      padding: 5px 10px; 
+      cursor: pointer;
+}
+
+.ListOfEngines li:hover {
+      background-color: #ffffff31;
+      
+    }
+
 .updateMenu {
     display: none;
     position: absolute; 
@@ -893,6 +927,9 @@ mark {
         background: #d1d1d1;
 
     }
+    
+
+    
 
 
     </style>
@@ -902,7 +939,7 @@ mark {
   <div>
     <br >
     <img src="https://ineverstopmewing.github.io/Hyper-B/logo.png" style="height: 64px; width: 64; position: fixed; right: 10px; top: 10px;">
-    <div style="font-size: 42px; font-weight: 700; text-align: center;">Update 4.11.2</div>
+    <div style="font-size: 42px; font-weight: 700; text-align: center;">Update 4.11.3</div>
     <div style="text-align: center;">Here's what's changed in the latest version:</div>
     <br>
     
@@ -910,13 +947,13 @@ mark {
     <p style="font-size: 20px; font-family: 'Courier New', Courier, monospace; font-weight: 700; position: relative; left: 10px;">
     Update:</p>
     <p style="font-size: 18px; font-family: 'Courier New', Courier, monospace; font-weight: 400; position: relative; left: 10px;">
-    This update adds this screen which shows you what the last update is and what changed. 
-    You can always check the Update by clicking on the Current version in the side menu</p>
+    This update adds a button to the settings that allows users to switch between search engines(Bing, DuckDuckGo, Google-default, Ecosia, Yahoo).</p>
     
     <p style="font-size: 20px; font-family: 'Courier New', Courier, monospace; font-weight: 700; position: relative; left: 10px;">
     Changes:</p>
     <p style="font-size: 18px; font-family: 'Courier New', Courier, monospace; font-weight: 400; position: relative; left: 10px;">
-    - New Screen</p>
+    - New Button</p>
+    
 
       
 
@@ -941,13 +978,17 @@ mark {
 </div>
 
 
-<div class="overlay">
-    
-    
+<div class="ListOfEngines" id="ListOfEngines">
+        <ul>
+            <li id="searchGoogle">Google</li>
+            <li id="searchYahoo">Yahoo</li>
+            <li id="searchBing">Bing</li>
+            <li id="searchDuckDuckGo">DuckDuckGo</li>
+            <li id="searchEcosia">Ecosia</li>
 
-   
+
+        </ul>
 </div>
-
 <!-- xy 320px shritt-->
 <div class="BrowserBackGrounds" id="BrowserBackGrounds" style="display: none;">
    
@@ -957,11 +998,11 @@ mark {
     <p class="backgroundImgs" style="left: 1160px;" id="BG4"></p>
     <p class="backgroundImgs" style="left: 1480px;" id="BG5"></p>
 
-    <input id="bg1InputText" type="text" class="invisInput" style="left: 100px;" value="Background 1" />
-    <input id="bg2InputText" type="text" class="invisInput" style="left: 420px;" value="Background 2" />
-    <input id="bg3InputText" type="text" class="invisInput" style="left: 740px;" value="Background 3" />
-    <input id="bg4InputText" type="text" class="invisInput" style="left: 1080px;" value="Background 4" />
-    <input id="bg5InputText" type="text" class="invisInput" style="left: 1390px;" value="Background 5" />
+    <input id="bg1InputText" type="text" class="invisInput" style="left: 100px;" value="Profile 1" />
+    <input id="bg2InputText" type="text" class="invisInput" style="left: 420px;" value="Profile 2" />
+    <input id="bg3InputText" type="text" class="invisInput" style="left: 740px;" value="Profile 3" />
+    <input id="bg4InputText" type="text" class="invisInput" style="left: 1080px;" value="Profile 4" />
+    <input id="bg5InputText" type="text" class="invisInput" style="left: 1390px;" value="Profile 5" />
 </div>
 
 
@@ -992,7 +1033,12 @@ mark {
         <li id="settings">Settings</li>
        
         <div class="favhidden">
+            <hr>
+            <p style="text-align: center;font-size: 20px;">Search engines:</p>
+            <hr>
+            <button class="design1"id="SerachEngineChangeBtn">Google</button>
             
+
             
             
             <hr>
@@ -1154,7 +1200,7 @@ mark {
         </div>
 
 
-        <p class="cv" id="cvbtn">Current Version: 4.11.2</p>
+        <p class="cv" id="cvbtn">Current Version: 4.11.3</p>
         
 
 
@@ -1177,13 +1223,21 @@ mark {
 
 
 <script>
-let prmodus = false;
+
+
+const searchDuckDuckGo = document.getElementById('searchDuckDuckGo')
+const searchEcosia = document.getElementById('searchEcosia')
+const searchBing = document.getElementById('searchBing')
+const searchYahoo = document.getElementById('searchYahoo')
+const searchGoogle = document.getElementById('searchGoogle')
+const SerachEngineChangeBtn = document.getElementById('SerachEngineChangeBtn');
 const cvbtn = document.getElementById('cvbtn');
 const nevershow = document.getElementById('nevershow');
 const closebtn = document.getElementById('closebtn');
 const clickBGImage = document.getElementById('clickBGImage');
 const clickBGColor = document.getElementById('clickBGColor');
 const menu1BG = document.getElementById('menu1BG');
+const ListOfEngines = document.getElementById('ListOfEngines');
 const openMenuBtn = document.getElementById('openMenuBtn');
 const bg1InputText = document.getElementById('bg1InputText');
 const bg2InputText = document.getElementById('bg2InputText');
@@ -1317,7 +1371,7 @@ document.addEventListener('keydown', function(event) {
 
     closebtn.addEventListener('click', () => {
         document.getElementById('updateMenuDiv').style.display = 'none';
-        localStorage.setItem('closed', 'true');
+        localStorage.setItem('closed1', 'true');
     });
     nevershow.addEventListener('click', () => {
         document.getElementById('updateMenuDiv').style.display = 'none';
@@ -1330,7 +1384,7 @@ document.addEventListener('keydown', function(event) {
         if (localStorage.getItem('nevershow') === 'true') {
             document.getElementById('updateMenuDiv').style.display = 'none';
         } else {
-            const closed = localStorage.getItem('closed');
+            const closed = localStorage.getItem('closed1');
             if (!closed) {
                 document.getElementById('updateMenuDiv').style.display = 'block';
             } else {
@@ -1441,11 +1495,15 @@ hyperbText.addEventListener('input', () => {
     const hyperbTextValue = hyperbText.value;
     localStorage.setItem('hyperbText', hyperbTextValue);
     document.getElementById('hypertext').textContent = hyperbTextValue;
+    if (hyperbTextValue === '') {
+        document.getElementById('hypertext').textContent = 'Hyper-B';
+
+    }
 });
 
 window.addEventListener('load', () => {
     const hyperbTextValue = localStorage.getItem('hyperbText');
-    browserBackgrounds.style.backgroundColor = localStorage.getItem('menucbglinkColor') || 'black';
+    browserBackgrounds.style.backgroundColor = localStorage.getItem('menucbglinkColor') || 'white';
     
     if (hyperbTextValue) {
         document.getElementById('hypertext').textContent = hyperbTextValue;
@@ -1453,6 +1511,112 @@ window.addEventListener('load', () => {
     }
 });
 
+
+
+SerachEngineChangeBtn.addEventListener('click', (e) => {
+    const bgcolorrr = sideMenu.style.backgroundColor;
+    ListOfEngines.style.backgroundColor = bgcolorrr || "white";
+    const bgcolorrrr = sideMenu.style.color;
+    ListOfEngines.style.color = bgcolorrrr || "black";
+    ListOfEngines.style.left = e.pageX + "px";
+    ListOfEngines.style.top = e.pageY + "px";
+    ListOfEngines.style.display = "block";
+    
+});
+
+document.addEventListener('click', (e) => {
+    // Prüfen ob das Menü sichtbar ist
+    if (ListOfEngines.style.display === "block") {
+        // Prüfen ob der Klick außerhalb von Button und Menü war
+        if (!SerachEngineChangeBtn.contains(e.target) && !ListOfEngines.contains(e.target)) {
+            ListOfEngines.style.display = "none";
+        }
+    }
+});
+//Search Engines Function
+searchGoogle.addEventListener('click', () => {
+    document.getElementById('SerachEngineChangeBtn').textContent = "Google";
+    ListOfEngines.style.display = "none";
+    document.getElementById('searchInput').placeholder = "Search with Google...";
+    localStorage.setItem('GoogleSearch', "true");
+    localStorage.setItem('YahooSearch', "false");
+    localStorage.setItem('BingSearch', "false");
+    localStorage.setItem('DuckSearch', "false");
+    localStorage.setItem('EcosiaSearch', "false");
+});
+searchYahoo.addEventListener('click', () => {
+    document.getElementById('SerachEngineChangeBtn').textContent = "Yahoo";
+    document.getElementById('searchInput').placeholder = "Search with Yahoo...";
+    ListOfEngines.style.display = "none";
+    localStorage.setItem('YahooSearch', "true");
+    localStorage.setItem('GoogleSearch', "false");
+    localStorage.setItem('BingSearch', "false");
+    localStorage.setItem('DuckSearch', "false");
+    localStorage.setItem('EcosiaSearch', "false");
+});
+searchBing.addEventListener('click', () => {
+    document.getElementById('SerachEngineChangeBtn').textContent = "Bing";
+    document.getElementById('searchInput').placeholder = "Search with Bing...";
+    ListOfEngines.style.display = "none";
+    localStorage.setItem('BingSearch', "true");
+    localStorage.setItem('YahooSearch', "false");
+    localStorage.setItem('GoogleSearch', "false");
+    localStorage.setItem('DuckSearch', "false");
+    localStorage.setItem('EcosiaSearch', "false");
+});
+searchDuckDuckGo.addEventListener('click', () => {
+    document.getElementById('SerachEngineChangeBtn').textContent = "DuckDuckGo";
+    document.getElementById('searchInput').placeholder = "Search with DuckDuckGo...";
+    ListOfEngines.style.display = "none";
+    localStorage.setItem('DuckSearch', "true");
+    localStorage.setItem('BingSearch', "false");
+    localStorage.setItem('YahooSearch', "false");
+    localStorage.setItem('GoogleSearch', "false");
+    localStorage.setItem('EcosiaSearch', "false");
+});
+searchEcosia.addEventListener('click', () => {
+    document.getElementById('SerachEngineChangeBtn').textContent = "Ecosia";
+    document.getElementById('searchInput').placeholder = "Search with Ecosia...";
+    ListOfEngines.style.display = "none";
+    localStorage.setItem('EcosiaSearch', "true");
+    localStorage.setItem('DuckSearch', "false");
+    localStorage.setItem('BingSearch', "false");
+    localStorage.setItem('YahooSearch', "false");
+    localStorage.setItem('GoogleSearch', "false");
+});
+
+
+
+
+
+
+window.addEventListener('load', () =>{
+    if (localStorage.getItem('GoogleSearch') === "true") {
+        document.getElementById('SerachEngineChangeBtn').textContent = "Google";
+        document.getElementById('searchInput').placeholder = "Search with Google..."
+
+    }
+    if (localStorage.getItem('YahooSearch') === "true") {
+        document.getElementById('SerachEngineChangeBtn').textContent = "Yahoo";
+        document.getElementById('searchInput').placeholder = "Search with Yahoo..."
+
+    }
+    if (localStorage.getItem('BingSearch') === "true") {
+        document.getElementById('SerachEngineChangeBtn').textContent = "Bing";
+        document.getElementById('searchInput').placeholder = "Search with Bing..."
+
+    }
+    if (localStorage.getItem('DuckSearch') === "true") {
+        document.getElementById('SerachEngineChangeBtn').textContent = "DuckDuckGo";
+        document.getElementById('searchInput').placeholder = "Search with DuckDuckGo..."
+
+    }
+    if (localStorage.getItem('EcosiaSearch') === "true") {
+        document.getElementById('SerachEngineChangeBtn').textContent = "Ecosia";
+        document.getElementById('searchInput').placeholder = "Search with Ecosia..."
+
+    }
+});
 
 
     
@@ -1471,7 +1635,7 @@ window.addEventListener('load', () => {
     } else {
         menuToggle.classList.add('rotated');
     }
-});
+    });
 
 
 PasswordInput.addEventListener('input', () => {
@@ -1730,7 +1894,7 @@ let setmenu = false;
         document.body.classList.remove('privatemode');
         document.getElementById('h1prm').innerHTML = `<h1 id="h1prm""> </h1>`;
         
-        document.getElementById('searchInput').placeholder = "Search with Hyper-B..."
+       
         document.getElementById('sbutton').style.backgroundColor = '#1e3a8a'
         document.getElementById('menuToggle').style.Color = '#1e3a8a'
         privateButton.textContent = "Privat";
@@ -2325,8 +2489,20 @@ function openMenuSide() {
                 sItem = query.substring(2); 
                     window.location.href = 'https://www.youtube.com/results?search_query=' + sItem;
                 }else {
-                    window.location.href = 'https://www.google.com/search?q=' + encodeURIComponent(query); // Google-Suche
-            }
+                    if (localStorage.getItem("GoogleSearch") === "true") {
+                        window.location.href = 'https://www.google.com/search?q=' + encodeURIComponent(query); 
+                    } else if (localStorage.getItem("YahooSearch") === "true") {
+                        window.location.href = 'https://search.yahoo.com/search?p=' + encodeURIComponent(query); 
+                    } else if (localStorage.getItem("BingSearch") === "true") {
+                        window.location.href = 'https://www.bing.com/search?q=' + encodeURIComponent(query); 
+                    } else if (localStorage.getItem("DuckSearch") === "true") {
+                        window.location.href = 'https://duckduckgo.com/?q=' + encodeURIComponent(query); 
+                    } else if (localStorage.getItem("EcosiaSearch") === "true") {
+                        window.location.href = 'https://www.ecosia.org/search?method=index&q=' + encodeURIComponent(query); 
+                    } else {
+                        window.location.href = 'https://www.google.com/search?q=' + encodeURIComponent(query); 
+                    }
+                }
                 }
             
         }
@@ -2827,6 +3003,10 @@ clickBGColor.addEventListener('click', () => {
 
 bg1.addEventListener('contextmenu', (e) => {
     e.preventDefault();
+    const backgroundColor = sideMenu.style.backgroundColor;
+    menu1BG.style.backgroundColor = backgroundColor || "white";
+    const color = sideMenu.style.color;
+    menu1BG.style.color = color || "black";
     menu1BG.style.left = e.pageX + "px";
     menu1BG.style.top = e.pageY + "px";
     menu1BG.style.display = "block";
@@ -2838,6 +3018,10 @@ bg1.addEventListener('contextmenu', (e) => {
 
 bg2.addEventListener('contextmenu', (e) => {
     e.preventDefault();
+    const backgroundColor = sideMenu.style.backgroundColor;
+    menu1BG.style.backgroundColor = backgroundColor || "white";
+    const color = sideMenu.style.color;
+    menu1BG.style.color = color || "black";
     menu1BG.style.left = e.pageX + "px";
     menu1BG.style.top = e.pageY + "px";
     menu1BG.style.display = "block";
@@ -2847,6 +3031,10 @@ bg2.addEventListener('contextmenu', (e) => {
 
 bg3.addEventListener('contextmenu', (e) => {
     e.preventDefault();
+    const backgroundColor = sideMenu.style.backgroundColor;
+    menu1BG.style.backgroundColor = backgroundColor || "white";
+    const color = sideMenu.style.color;
+    menu1BG.style.color = color || "black";
     menu1BG.style.left = e.pageX + "px";
     menu1BG.style.top = e.pageY + "px";
     menu1BG.style.display = "block";
@@ -2858,6 +3046,10 @@ bg3.addEventListener('contextmenu', (e) => {
 
 bg4.addEventListener('contextmenu', (e) => {
     e.preventDefault();
+    const backgroundColor = sideMenu.style.backgroundColor;
+    menu1BG.style.backgroundColor = backgroundColor || "white";
+    const color = sideMenu.style.color;
+    menu1BG.style.color = color || "black";
     menu1BG.style.left = e.pageX + "px";
     menu1BG.style.top = e.pageY + "px";
     menu1BG.style.display = "block";
@@ -2868,6 +3060,10 @@ bg4.addEventListener('contextmenu', (e) => {
 
 bg5.addEventListener('contextmenu', (e) => {
     e.preventDefault();
+    const backgroundColor = sideMenu.style.backgroundColor;
+    menu1BG.style.backgroundColor = backgroundColor || "white";
+    const color = sideMenu.style.color;
+    menu1BG.style.color = color || "black";
     menu1BG.style.left = e.pageX + "px";
     menu1BG.style.top = e.pageY + "px";
     menu1BG.style.display = "block";
@@ -2976,11 +3172,11 @@ bg5InputText.addEventListener('input', () => {
 });
     window.addEventListener('load', () => {
         localStorage.setItem('hintergrundpaint', 'false');
-        bg1InputText.value = localStorage.getItem('backgroundImage0Text') || 'Background 1';
-        bg2InputText.value = localStorage.getItem('backgroundImage1Text') || 'Background 2';
-        bg3InputText.value = localStorage.getItem('backgroundImage2Text') || 'Background 3';
-        bg4InputText.value = localStorage.getItem('backgroundImage3Text') || 'Background 4';
-        bg5InputText.value = localStorage.getItem('backgroundImage4Text') || 'Background 5';
+        bg1InputText.value = localStorage.getItem('backgroundImage0Text') || 'Profile 1';
+        bg2InputText.value = localStorage.getItem('backgroundImage1Text') || 'Profile 2';
+        bg3InputText.value = localStorage.getItem('backgroundImage2Text') || 'Profile 3';
+        bg4InputText.value = localStorage.getItem('backgroundImage3Text') || 'Profile 4';
+        bg5InputText.value = localStorage.getItem('backgroundImage4Text') || 'Profile 5';
 
         //bgo unten
         if (localStorage.getItem('bg1colorImage') === '1') {
@@ -3042,14 +3238,7 @@ bg5InputText.addEventListener('input', () => {
             bg5.style.width = "300px";
             bg5.style.height = "200px";
         }
-        if (localStorage.getItem('menucbglinkColor')) {
-            const color = localStorage.getItem('menucbglinkColor');
-            const colortext = localStorage.getItem('menuclinkColor');
-
-            document.querySelector('.menu1BG').style.backgroundColor = color;
-            document.querySelector('.menu1BG').style.color = colortext;
-
-        }
+        
             
 
     });
