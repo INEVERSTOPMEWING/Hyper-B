@@ -1274,7 +1274,7 @@ mark {
     <div style="position: fixed; top:-10">
     <p style="color: #000000;font-size: 28px; font-weight: 500;text-decoration: underline;">Search Box</p>
     
-    <input type="text" id="hyperbText" class="inputSideMenu" placeholder="Hyper-B">
+    <input type="text" id="hyperbText" class="inputSideMenu" placeholder="Hyper-B" value="Hyper-B">
     <p style="color: #000000; text-align: center;">Color</p>
     <input type="color" id="stextcolor" class="design" style="text-align: center;">
 
@@ -1955,9 +1955,11 @@ window.addEventListener('load', () => {
     browserBackgrounds.style.backgroundColor = clr;
     
     if (hyperbTextValue) {
-        document.getElementById('hypertext').textContent = hyperbTextValue;
         hyperbText.value = hyperbTextValue;
+        document.getElementById('hypertext').textContent = hyperbTextValue;
+        
     }
+    
 });
 
 
@@ -3957,7 +3959,8 @@ bg1.addEventListener('click', () => {
     }
     localStorage.setItem('sbcolor', localStorage.getItem('sbcolorpf1')) || "black";
     localStorage.setItem('sbbgcolor', localStorage.getItem('sbbgcolorpf1')) || "white";
-    localStorage.setItem('hyperbText', localStorage.getItem('sbtextpf1')) || "Hyper-B";
+    const sbtextpf1 = localStorage.getItem('sbtextpf1');
+    localStorage.setItem('hyperbText', sbtextpf1 !== null ? sbtextpf1 : "Hyper-B");
     localStorage.setItem('sbbutlinkColor', localStorage.getItem('sbbColorpf1')) || "white";
     localStorage.setItem('sbutlinkColor', localStorage.getItem('sbbcColorpf1')) || "black";
     localStorage.setItem('linkColor', localStorage.getItem('favColorpf1')) || "black";
@@ -3989,7 +3992,8 @@ bg2.addEventListener('click', () => {
     }
     localStorage.setItem('sbcolor', localStorage.getItem('sbcolorpf2')) || "black";
     localStorage.setItem('sbbgcolor', localStorage.getItem('sbbgcolorpf2')) || "white";
-    localStorage.setItem('hyperbText', localStorage.getItem('sbtextpf2')) || "Hyper-B";
+    const sbtextpf2 = localStorage.getItem('sbtextpf2');
+    localStorage.setItem('hyperbText', sbtextpf2 !== null ? sbtextpf2 : "Hyper-B");
     localStorage.setItem('sbbutlinkColor', localStorage.getItem('sbbColorpf2')) || "white";
     localStorage.setItem('sbutlinkColor', localStorage.getItem('sbbcColorpf2')) || "black";
     localStorage.setItem('linkColor', localStorage.getItem('favColorpf2')) || "black";
@@ -4016,7 +4020,8 @@ bg3.addEventListener('click', () => {
     }
     localStorage.setItem('sbcolor', localStorage.getItem('sbcolorpf3')) || "black";
     localStorage.setItem('sbbgcolor', localStorage.getItem('sbbgcolorpf3')) || "white";
-    localStorage.setItem('hyperbText', localStorage.getItem('sbtextpf3')) || "Hyper-B";
+    const sbtextpf3 = localStorage.getItem('sbtextpf3');
+    localStorage.setItem('hyperbText', sbtextpf3 !== null ? sbtextpf3 : "Hyper-B");
     localStorage.setItem('sbbutlinkColor', localStorage.getItem('sbbColorpf3')) || "white";
     localStorage.setItem('sbutlinkColor', localStorage.getItem('sbbcColorpf3')) || "black";
     localStorage.setItem('linkColor', localStorage.getItem('favColorpf3')) || "black";
@@ -4044,7 +4049,8 @@ bg4.addEventListener('click', () => {
     }
     localStorage.setItem('sbcolor', localStorage.getItem('sbcolorpf4')) || "black";
     localStorage.setItem('sbbgcolor', localStorage.getItem('sbbgcolorpf4')) || "white";
-    localStorage.setItem('hyperbText', localStorage.getItem('sbtextpf4')) || "Hyper-B";
+    const sbtextpf4 = localStorage.getItem('sbtextpf4');
+    localStorage.setItem('hyperbText', sbtextpf4 !== null ? sbtextpf4 : "Hyper-B");
     localStorage.setItem('sbbutlinkColor', localStorage.getItem('sbbColorpf4')) || "white";
     localStorage.setItem('sbutlinkColor', localStorage.getItem('sbbcColorpf4')) || "black";
     localStorage.setItem('linkColor', localStorage.getItem('favColorpf4')) || "black";
@@ -4072,7 +4078,8 @@ bg5.addEventListener('click', () => {
     }
     localStorage.setItem('sbcolor', localStorage.getItem('sbcolorpf5')) || "black";
     localStorage.setItem('sbbgcolor', localStorage.getItem('sbbgcolorpf5')) || "white";
-    localStorage.setItem('hyperbText', localStorage.getItem('sbtextpf5')) || "Hyper-B";
+    const sbtextpf5 = localStorage.getItem('sbtextpf5');
+    localStorage.setItem('hyperbText', sbtextpf5 !== null ? sbtextpf5 : "Hyper-B");
     localStorage.setItem('sbbutlinkColor', localStorage.getItem('sbbColorpf5')) || "white";
     localStorage.setItem('sbutlinkColor', localStorage.getItem('sbbcColorpf5')) || "black";
     localStorage.setItem('linkColor', localStorage.getItem('favColorpf5')) || "black";
