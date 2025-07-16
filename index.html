@@ -982,7 +982,7 @@ mark {
 .Hyper-B {
     display: block;
     position: absolute; 
-    top: 50%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
     height: 1000px;
@@ -998,6 +998,9 @@ mark {
     will-change: transform, opacity;
     backface-visibility: hidden;
     perspective: 1000px;
+    scale: 0.9;
+    transform-origin: center center;
+    
 }
 .Hyper-B.animation-done {
     will-change: auto;
@@ -1248,6 +1251,34 @@ mark {
             outline: none;
             transform: scale(1.05);
     }
+    .slider {
+    width: 100px;
+    height: 8px;
+    background: #ddd;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 8px;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #000000;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+
+.slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: #000000;
+    border: none;
+    border-radius: 8px;
+    
+}
         
     
 
@@ -1317,6 +1348,9 @@ mark {
     
 </div>
 
+
+
+
 <div class="Hyper-B" id="aiContainer" style="display: none;">
     <br><br><br><br><br><br><br><br><br><br>
     <p style="font-size: 90px; text-align: center; font-weight: 600; position: absolute; left:270px; top:-60px; z-index: 1001;">Hyper-AI </p>
@@ -1333,20 +1367,20 @@ mark {
   <div>
     <br >
     <img src="https://ineverstopmewing.github.io/Hyper-B/logo.png" style="height: 64px; width: 64; position: fixed; right: 10px; top: 10px;">
-    <div style="font-size: 42px; font-weight: 700; text-align: center;">News!!</div>
-    <div style="text-align: center;">Here's what's New:</div>
+    <div style="font-size: 42px; font-weight: 700; text-align: center;">Update 4.12</div>
+    <div style="text-align: center;">Here's what's changed in the latest version:</div>
     <br>
     
     <div class="update-content">
     <p style="font-size: 20px; font-family: 'Courier New', Courier, monospace; font-weight: 700; position: relative; left: 10px;">
-    News:</p>
+    Update:</p>
     <p style="font-size: 18px; font-family: 'Courier New', Courier, monospace; font-weight: 400; position: relative; left: 10px;">
-    We Added a Hyper-B Extension for your Browser, you can Download it <a href="https://sites.google.com/view/hyper-b/extension" style="color: rgb(0, 0, 0);">Here</a>. The Extension is just a new tab overwriter that overwrites your new tab with Hyper-B.   </p>
+    AI AI AI!!! AI is finally added to Hyper-B! The AI is called Hyper-AI and located in the Sidemenu. The AI is still in beta and has a Rate limit by 20 RPM! We also added Profiles wich are located in the Sidemenu -> Settings-> Profiles or press Shift + Space. You can right click on a Profile to get a menu for the customization! To select one Profile just Click on it. There are overall 5 Profiles that can be Customized!   </p>
     
     <p style="font-size: 20px; font-family: 'Courier New', Courier, monospace; font-weight: 700; position: relative; left: 10px;">
     Changes:</p>
     <p style="font-size: 18px; font-family: 'Courier New', Courier, monospace; font-weight: 400; position: relative; left: 10px;">
-    - Nothing changed</p>
+    - New Button <br> - New Menu <br> - New Search Bar<br> - New AI Button<br> - New Design<p>
     
 
       
@@ -1428,6 +1462,7 @@ mark {
     +
 </button>
 
+
 <div class="widget-container" id="widgetContainer"></div>
 </div>
 
@@ -1459,6 +1494,8 @@ mark {
             
             <p style="text-align: left;font-size: 20px;">AI Chat Bar</p>
             <div class="morph-toggle1" onclick="toggleButtonbar(this)" style="position: fixed; top: 865px; left: 160px;"></div>
+            <p style="text-align: left;font-size: 20px;">Hyper-AI Size</p>
+            <input type="range" min="0" max="100" value="50" class="slider" id="mySlider">
             </div>
            
             
@@ -1740,6 +1777,48 @@ let nameAlready = false;
     
 });
 
+const slider = document.getElementById('mySlider');
+
+slider.addEventListener('input', function() {
+    const value = Number(this.value); // Wert als Zahl
+    localStorage.setItem('sliderValue', value)
+    if (value >= 0 && value <= 25) {
+        const aicontainer = document.querySelector('.Hyper-B')         
+            aicontainer.style.animation = 'none';       
+            aicontainer.style.position =  "absolute"
+            aicontainer.style.transform = "scale(0.7) translate(-80%, -80%)";
+            aicontainer.style.left = "50%";
+            aicontainer.style.top = "50%";
+            localStorage.setItem('sizeAicont', 'small')
+    }
+    if (value >= 26 && value <= 74) {
+        const aicontainer = document.querySelector('.Hyper-B')     
+                aicontainer.style.top = "45%";
+                aicontainer.style.left = "50%";
+                aicontainer.style.transform = "scale(1) translate(-50%, -50%)";
+        localStorage.setItem('sizeAicont', 'medium')
+    }
+    if (value >= 75 && value <=100) {
+        localStorage.setItem('sizeAicont', 'large')
+        
+    const aicontainer = document.querySelector('.Hyper-B')
+                aicontainer.style.animation = 'none';
+                aicontainer.style.position =  "absolute"
+                aicontainer.style.transform = "scale(1.25) translate(-50%, -50%)";
+                aicontainer.style.left = "55%";
+                aicontainer.style.top = "50%";
+    }
+});
+window.addEventListener('load',() => {
+    
+    const value = localStorage.getItem('sliderValue');
+    if (value) {
+        document.getElementById('mySlider').value = value;
+    } else {
+        document.getElementById('mySlider').value = "50";
+    }
+})
+
 closeaiconfirm.addEventListener('click', () => {
     aiMenuConfirm.style.display = 'none';
 });
@@ -1791,6 +1870,8 @@ function toggleButtonbar(button) {
         document.getElementById('aiFastInput').style.display = 'block';
     }
 }
+
+
 window.addEventListener('load', function() {
     const toggleButton = document.querySelector('.morph-toggle1'); // Button Element holen
     
@@ -4205,8 +4286,34 @@ bg5InputText.addEventListener('input', () => {
             document.getElementById('senderInput').value = savedUsername;
         }
         
-    });        
-
+    });
+    window.addEventListener('load', () => {
+        if (localStorage.getItem('sizeAicont') === 'small') {
+            const aicontainer = document.querySelector('.Hyper-B')         
+            aicontainer.style.animation = 'none';       
+            aicontainer.style.position =  "absolute"
+            aicontainer.style.transform = "scale(0.7) translate(-80%, -80%)";
+            aicontainer.style.left = "50%";
+            aicontainer.style.top = "50%";
+        }
+        if (localStorage.getItem('sizeAicont') === 'medium') {
+            const aicontainer = document.querySelector('.Hyper-B')     
+                aicontainer.style.top = "45%";
+                aicontainer.style.left = "50%";
+                aicontainer.style.transform = "scale(1) translate(-50%, -50%)";
+        }
+        if (localStorage.getItem('sizeAicont') === 'large') {
+           
+            const aicontainer = document.querySelector('.Hyper-B')
+                aicontainer.style.animation = 'none';
+                aicontainer.style.position =  "absolute"
+                aicontainer.style.transform = "scale(1.25) translate(-50%, -50%)";
+                aicontainer.style.left = "55%";
+                aicontainer.style.top = "50%";
+        }
+    });
+    
+    
 
     class ShapesChat {
             constructor() {
@@ -4295,6 +4402,7 @@ bg5InputText.addEventListener('input', () => {
             this.addMessage('Commands', '/image [description] | Generates an image based on the description!');
             this.addMessage('Commands', '/background [color/hex:#ffffff] | Changes the background color [color/hex]!');
             this.addMessage('Commands', '/hypertext [text] | Changes the Hyper-B text in the Search box!');
+            this.addMessage('Commands', '/size [small/medium/large] | Changes the Size of the AI Container!');
             
             break;           
             
@@ -4303,6 +4411,9 @@ bg5InputText.addEventListener('input', () => {
         case '/clear':
             this.chatMessages.innerHTML = '';
             this.addMessage('Hyper-AI', 'Chat wurde geleert.');
+            setTimeout(() => {
+                this.chatMessages.innerHTML = '';
+            }, 1000);
             break;
             
         case '/time':
@@ -4365,6 +4476,42 @@ bg5InputText.addEventListener('input', () => {
             } else {
                 this.addMessage('Error', 'Please provide a color or hex value after /background command.');
             }
+        }
+        else if (command.startsWith('/size')) {
+            const SizeInput = message.substring(6);
+            
+            if (SizeInput.trim() === 'small') { 
+                
+                const aicontainer = document.querySelector('.Hyper-B')         
+            aicontainer.style.animation = 'none';       
+            aicontainer.style.position =  "absolute"
+            aicontainer.style.transform = "scale(0.7) translate(-80%, -80%)";
+            aicontainer.style.left = "50%";
+            aicontainer.style.top = "50%";
+                localStorage.setItem('sizeAicont', 'small')
+                this.addMessage('Hyper-AI', 'Changed the Container size to small.');
+            } 
+            if (SizeInput.trim() === 'medium') { 
+                const aicontainer = document.querySelector('.Hyper-B')     
+                aicontainer.style.top = "45%";
+                aicontainer.style.left = "50%";
+                aicontainer.style.transform = "scale(1) translate(-50%, -50%)";
+                
+                
+                localStorage.setItem('sizeAicont', 'medium')
+                this.addMessage('Hyper-AI', 'Changed the Container size to medium.');
+            } 
+            if (SizeInput.trim() === 'large') { 
+                
+                const aicontainer = document.querySelector('.Hyper-B')
+                aicontainer.style.animation = 'none';
+                aicontainer.style.position =  "absolute"
+                aicontainer.style.transform = "scale(1.25) translate(-50%, -50%)";
+                aicontainer.style.left = "55%";
+                aicontainer.style.top = "50%";
+                localStorage.setItem('sizeAicont', 'large')
+                this.addMessage('Hyper-AI', 'Changed the Container size to large.');
+            } 
         }
         
         else {
