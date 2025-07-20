@@ -197,6 +197,7 @@
             align-items: center;
             width: 100%;
         }
+        
         .cv {
             font-family: 'Courier New', Courier, monospace;
             
@@ -208,8 +209,8 @@
             padding: 15px 20px;
             font-size: 16px;
             border: 1px solid #ddd;
-            border-radius: 50px 0 0 50px; /* Ecken nur links abgerundet */
-            background-color: rgba(255, 255, 255, 0.8); /* leicht transparent */
+            border-radius: 50px 0 0 50px; 
+            background-color: rgb(255, 255, 255); 
             color: #333;
             width: 100%;
             box-sizing: border-box;
@@ -218,9 +219,44 @@
         }
 
         .search-input:focus {
-            background-color: rgba(255, 255, 255, 1); /* weniger transparent */
+            background-color: rgba(255, 255, 255, 1); 
             outline: none;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.6); /* Fokus-Effekt */
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); 
+        }
+        
+       
+        .searchHist {
+            text-align: left;
+            display: none;
+            position: absolute;
+            background: rgb(255, 255, 255);
+            border: 1px solid #252525;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            z-index: 1000;
+            color: rgb(0, 0, 0);
+            border: none;
+            border-radius: 0px 0px 25px 25px;
+            font-family: 'Courier New', Courier, monospace;
+            width: 375px;
+            max-height: 300px;         /* max. Höhe (z. B. 10 Einträge à ~30px) */
+            overflow-y: auto;  
+            scrollbar-width: none;      /* Firefox */
+            -ms-overflow-style: none;  
+        }
+        .searchHist ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .searchHist li {
+            padding: 5px 10px; 
+            cursor: pointer;
+        }
+
+        .searchHist::-webkit-scrollbar {
+            display: none;
         }
 
         .search-button {
@@ -233,9 +269,9 @@
             cursor: pointer;
             transition: background-color 0.3s, transform 0.2s;
             
-            height: 100%;
+            height: 50px;
             width: 60px;
-
+            
             
            
         }
@@ -1201,6 +1237,72 @@ mark {
             transform: translateX(35px);
             border-radius: 30%;
         }
+        .morph-toggle2 {
+            width: 70px;
+            height: 35px;
+            background: #ff6b6b;
+            border-radius: 35px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            overflow: hidden;
+        }
+
+        .morph-toggle2.active {
+            background: #51cf66;
+            border-radius: 10px;
+        }
+
+        .morph-toggle2::before {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: white;
+            top: 5px;
+            left: 5px;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .morph-toggle2.active::before {
+            transform: translateX(35px);
+            border-radius: 30%;
+        }
+        .morph-toggle3 {
+            width: 70px;
+            height: 35px;
+            background: #ff6b6b;
+            border-radius: 35px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            overflow: hidden;
+        }
+
+        .morph-toggle3.active {
+            background: #51cf66;
+            border-radius: 10px;
+        }
+
+        .morph-toggle3::before {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: white;
+            top: 5px;
+            left: 5px;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .morph-toggle3.active::before {
+            transform: translateX(35px);
+            border-radius: 30%;
+        }
         .imgai:hover {
             transform: scale(1.15);
             transition: transform 0.3s ease, color 0.3s ease;
@@ -1367,7 +1469,7 @@ mark {
   <div>
     <br >
     <img src="https://ineverstopmewing.github.io/Hyper-B/logo.png" style="height: 64px; width: 64; position: fixed; right: 10px; top: 10px;">
-    <div style="font-size: 42px; font-weight: 700; text-align: center;">Update 4.12</div>
+    <div style="font-size: 42px; font-weight: 700; text-align: center;">Update 4.12.1</div>
     <div style="text-align: center;">Here's what's changed in the latest version:</div>
     <br>
     
@@ -1375,12 +1477,11 @@ mark {
     <p style="font-size: 20px; font-family: 'Courier New', Courier, monospace; font-weight: 700; position: relative; left: 10px;">
     Update:</p>
     <p style="font-size: 18px; font-family: 'Courier New', Courier, monospace; font-weight: 400; position: relative; left: 10px;">
-    AI AI AI!!! AI is finally added to Hyper-B! The AI is called Hyper-AI and located in the Sidemenu. The AI is still in beta and has a Rate limit by 20 RPM! We also added Profiles wich are located in the Sidemenu -> Settings-> Profiles or press Shift + Space. You can right click on a Profile to get a menu for the customization! To select one Profile just Click on it. There are overall 5 Profiles that can be Customized!   </p>
-    
+        In this update, the search history has been updated and moved below the search input. You can disable the search history in the side menu under Settings → Search History. To clear all entries, right-click in the Search History menu. To delete a single search entry, simply click on the X.
     <p style="font-size: 20px; font-family: 'Courier New', Courier, monospace; font-weight: 700; position: relative; left: 10px;">
     Changes:</p>
     <p style="font-size: 18px; font-family: 'Courier New', Courier, monospace; font-weight: 400; position: relative; left: 10px;">
-    - New Button <br> - New Menu <br> - New Search Bar<br> - New AI Button<br> - New Design<p>
+    - Updated Search History<p>
     
 
       
@@ -1424,6 +1525,7 @@ mark {
         <ul>
             <li id="searchGoogle">Google</li>
             <li id="searchAndi">Andi Search</li>
+            <li id="searchBrave">Brave</li>
             <li id="searchDuckDuckGo">DuckDuckGo</li>
             <li id="searchBing">Bing</li>
             <li id="searchQwant">Qwant</li>
@@ -1486,26 +1588,30 @@ mark {
         <div class="favhidden">
             <p style="text-align: center;font-size: 22px; font-weight: 700;">Overall</p>
             <hr>
-            <p style="text-align: left;font-size: 20px;">Design</p>
+            <p style="text-align: left;font-size: 22px; font-weight: 500;">Design</p>
             <button class="design1" id="openMenuBtn">Profiles</button>
             <div id="aiControls" style="display: none;">
+                <p style="text-align: left;font-size: 22px; font-weight: 500;">AI</p>
             <p style="text-align: left;font-size: 20px;">AI Button</p>
-            <div class="morph-toggle" onclick="toggleButton(this)" style="position: fixed; top: 820px; left: 160px;"></div>
+            <div class="morph-toggle" onclick="toggleButton(this)" style="position: fixed; top: 875px; left: 160px;"></div>
             
             <p style="text-align: left;font-size: 20px;">AI Chat Bar</p>
-            <div class="morph-toggle1" onclick="toggleButtonbar(this)" style="position: fixed; top: 865px; left: 160px;"></div>
+            <div class="morph-toggle1" onclick="toggleButtonbar(this)" style="position: fixed; top: 920px; left: 160px;"></div>
             <p style="text-align: left;font-size: 20px;">Hyper-AI Size</p>
             <input type="range" min="0" max="100" value="50" class="slider" id="mySlider">
             </div>
-           
-            
-            <p style="text-align: left;font-size: 20px;">Search Engines</p>
+
+
+            <p style="text-align: left;font-size: 22px; font-weight: 500;">Search Engines</p>
             <button class="design1"id="SerachEngineChangeBtn">Google</button>
             <p class="infoSymbol" id="infoSymbol" style="display: none;">ⓘ</p>
-            
-            
-            
-            
+            <p style="text-align: left;font-size: 22px; font-weight: 500;">Search History</p>
+            <p style="text-align: left;font-size: 20px;">Safe History</p>
+            <div class="morph-toggle3" onclick="toggleSafeHistory(this)" style="position: fixed; top: 1195px; left: 230px;"></div>
+            <div id="SSHVisible" style="display: none;">
+            <p style="text-align: left;font-size: 20px;">Show Search History</p>
+            <div class="morph-toggle2" onclick="toggleSuggestions(this)" style="position: fixed; top: 1240px; left: 230px;"></div></div>
+
             <br><br>
             <p style="text-align: center;font-size: 22px; font-weight: 700;">Menu</p>
             <hr>
@@ -1596,8 +1702,8 @@ mark {
             </div>
             
             <br>
-            <br>
-            <button id="rstBtn" class="hackenBtn3"; style="display: none;" onclick="localStorage.clear();location.reload()"; title="Reset">Reset</button>
+            
+            <button id="rstBtn" class="hackenBtn3"; style="display: block;" onclick="localStorage.clear();location.reload()"; title="Reset">Reset</button>
             <br><br>
             <hr>
 
@@ -1605,20 +1711,28 @@ mark {
         </div>
 
 
-        <p class="cv" id="cvbtn">Current Version: 4.12</p>
+        <p class="cv" id="cvbtn">Current Version: 4.12.1</p>
         
 
 
     </ul>
 </div>
 <input style="display: none;" type="text" id="aiFastInput" class="aifastsearch" placeholder="Type here to chat with Hyper-AI...">
-<div class="search-container"> 
+<div class="search-container" id="sssbox"> 
     <h1 style="font-family: 'Courier New', Courier, monospace;font-size:100px;" id="hypertext">Hyper-B</h1>
     <h1 id="h1prm" style="font-size: small; font-family: 'Courier New', Courier, monospace;"></h1>
     <form id="urlForm">
         <div class="search-box">
-            <input style="font-family: 'Courier New', Courier, monospace;" id="searchInput" class="search-input" type="text" placeholder="Search with Hyper-B..." required>
+            <input autocomplete="off" style="font-family: 'Courier New', Courier, monospace;" id="searchInput" class="search-input" type="text" placeholder="Search with Hyper-B..." required>
             <button id="sbutton" class="search-button" type="submit" title="Search"><i class="fas fa-search"></i></button>
+        </div>
+        <div id="SHistory" class="searchHist">
+            <ul id="searchList">
+                
+                
+                
+            </ul>
+            
         </div>
     </form>
    
@@ -1630,6 +1744,7 @@ mark {
 <script>
 // variablen
 
+const SHistory = document.getElementById('SHistory');
 const closeai1 = document.getElementById('closeai1');
 const aiControls = document.getElementById('aiControls');
 const confirmAIButton = document.getElementById('confirmAIButton');
@@ -1649,6 +1764,7 @@ const searchEcosia = document.getElementById('searchEcosia')
 const searchBing = document.getElementById('searchBing')
 const searchYahoo = document.getElementById('searchYahoo')
 const searchGoogle = document.getElementById('searchGoogle')
+const searchBrave = document.getElementById('searchBrave')
 const SerachEngineChangeBtn = document.getElementById('SerachEngineChangeBtn');
 const cvbtn = document.getElementById('cvbtn');
 const nevershow = document.getElementById('nevershow');
@@ -1731,6 +1847,7 @@ const historyButton = document.getElementById('historyButton');
 const historyMenu = document.getElementById('historyMenu');
 const clearHistoryButton = document.getElementById('clearHistory');
 let searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
+let searchListLSs = JSON.parse(localStorage.getItem('searchListLS')) || [];
     document.addEventListener('keydown', function(event) {
     if (event.key === 'Enter') {
        
@@ -1776,6 +1893,42 @@ let nameAlready = false;
         }
     
 });
+
+searchInput.addEventListener('focus', () => {
+    if (localStorage.getItem('hyperaibtoggle3') === 'true') {
+    if (localStorage.getItem('hyperaibtoggle2') === 'true') {
+    const hypertext = document.getElementById('sideMenu').style.color;
+            const bg = document.getElementById('sideMenu').style.backgroundColor;
+
+    SHistory.style.color = hypertext || '#000'
+    SHistory.style.display = 'block';
+    SHistory.style.background = bg || '#fff'
+    const elmt = document.querySelector('.search-input')
+    elmt.style.borderRadius = '25px 0 0 0px';
+    }}
+});
+window.addEventListener('load',() => {
+    setTimeout(() => {
+        
+        const bg = document.getElementById('sideMenu').style.backgroundColor;
+        const hypertext = document.getElementById('sideMenu').style.color;
+        SHistory.style.color = hypertext || '#000'
+        SHistory.style.background = bg || '#fff'
+        
+    }, 1);
+    
+    
+});
+
+document.addEventListener('click', function(event) {
+    const target = event.target;
+    if (!target.closest('.searchHist') && !target.closest('.search-input') && !target.closest('.side-menu')) {
+        SHistory.style.display = 'none';
+        const elmt = document.querySelector('.search-input');
+        elmt.style.borderRadius = '50px 0 0 50px';
+    }
+});
+
 
 const slider = document.getElementById('mySlider');
 
@@ -1872,6 +2025,56 @@ function toggleButtonbar(button) {
 }
 
 
+
+function toggleSuggestions(button) {
+    const isActive = button.classList.contains('active');
+    
+    if (isActive) {
+        button.classList.remove('active');
+        localStorage.setItem('hyperaibtoggle2', 'false');
+    } else {
+        button.classList.add('active');
+        localStorage.setItem('hyperaibtoggle2', 'true');
+    }
+}
+window.addEventListener('load', function() {
+    const toggleButton = document.querySelector('.morph-toggle2'); // Button Element holen
+    
+    if (localStorage.getItem('hyperaibtoggle2') === 'true') {
+        toggleButton.classList.add('active'); // Button auf aktiv setzen
+    } else {
+        toggleButton.classList.remove('active'); // Button auf inaktiv setzen
+    }
+});
+
+function toggleSafeHistory(button) {
+    const isActive = button.classList.contains('active');
+    
+    if (isActive) {
+        button.classList.remove('active');
+        document.getElementById('SSHVisible').style.display = 'none';
+        localStorage.setItem('hyperaibtoggle3', 'false');
+        
+
+    } else {
+        button.classList.add('active');
+        document.getElementById('SSHVisible').style.display = 'block';
+        localStorage.setItem('hyperaibtoggle3', 'true');
+        
+    }
+}
+window.addEventListener('load', function() {
+    const toggleButton = document.querySelector('.morph-toggle3'); 
+    
+    if (localStorage.getItem('hyperaibtoggle3') === 'true') {
+        toggleButton.classList.add('active'); 
+                document.getElementById('SSHVisible').style.display = 'block';
+
+    } else {
+        toggleButton.classList.remove('active'); 
+    }
+});
+   
 window.addEventListener('load', function() {
     const toggleButton = document.querySelector('.morph-toggle1'); // Button Element holen
     
@@ -1945,7 +2148,7 @@ closeai.addEventListener('click', () => {
 
     closebtn.addEventListener('click', () => {
         document.getElementById('updateMenuDiv').style.display = 'none';
-        localStorage.setItem('closed3', 'true');
+        localStorage.setItem('closed4', 'true');
     });
     nevershow.addEventListener('click', () => {
         document.getElementById('updateMenuDiv').style.display = 'none';
@@ -1958,7 +2161,7 @@ closeai.addEventListener('click', () => {
         if (localStorage.getItem('nevershow') === 'true') {
             document.getElementById('updateMenuDiv').style.display = 'none';
         } else {
-            const closed = localStorage.getItem('closed3');
+            const closed = localStorage.getItem('closed4');
             if (!closed) {
                 document.getElementById('updateMenuDiv').style.display = 'block';
             } else {
@@ -2129,6 +2332,20 @@ searchGoogle.addEventListener('click', () => {
     localStorage.setItem('DuckSearch', "false");
     localStorage.setItem('EcosiaSearch', "false");
     localStorage.setItem('AndiSearch', "false");
+    localStorage.setItem('BraveSearch', "false");
+});
+searchBrave.addEventListener('click', () => {
+    document.getElementById('SerachEngineChangeBtn').textContent = "Brave";
+    ListOfEngines.style.display = "none";
+    infoSymbol.style.display = 'none';
+    document.getElementById('searchInput').placeholder = "Search with Brave...";
+    localStorage.setItem('GoogleSearch', "false");
+    localStorage.setItem('BraveSearch', "true");
+    localStorage.setItem('YahooSearch', "false");
+    localStorage.setItem('BingSearch', "false");
+    localStorage.setItem('DuckSearch', "false");
+    localStorage.setItem('EcosiaSearch', "false");
+    localStorage.setItem('AndiSearch', "false");
 });
 searchYahoo.addEventListener('click', () => {
     document.getElementById('SerachEngineChangeBtn').textContent = "Yahoo";
@@ -2142,6 +2359,7 @@ searchYahoo.addEventListener('click', () => {
     localStorage.setItem('EcosiaSearch', "false");
     localStorage.setItem('QwantSearch', "false");
     localStorage.setItem('AndiSearch', "false");
+    localStorage.setItem('BraveSearch', "false");
 });
 searchBing.addEventListener('click', () => {
     document.getElementById('SerachEngineChangeBtn').textContent = "Bing";
@@ -2155,6 +2373,7 @@ searchBing.addEventListener('click', () => {
     localStorage.setItem('EcosiaSearch', "false");
     localStorage.setItem('QwantSearch', "false");
     localStorage.setItem('AndiSearch', "false");
+    localStorage.setItem('BraveSearch', "false");
 });
 searchDuckDuckGo.addEventListener('click', () => {
     document.getElementById('SerachEngineChangeBtn').textContent = "DuckDuckGo";
@@ -2168,6 +2387,7 @@ searchDuckDuckGo.addEventListener('click', () => {
     localStorage.setItem('EcosiaSearch', "false");
     localStorage.setItem('QwantSearch', "false");
     localStorage.setItem('AndiSearch', "false");
+    localStorage.setItem('BraveSearch', "false");
 });
 searchEcosia.addEventListener('click', () => {
     document.getElementById('SerachEngineChangeBtn').textContent = "Ecosia";
@@ -2181,6 +2401,7 @@ searchEcosia.addEventListener('click', () => {
     localStorage.setItem('GoogleSearch', "false");
     localStorage.setItem('QwantSearch', "false");
     localStorage.setItem('AndiSearch', "false");
+    localStorage.setItem('BraveSearch', "false");
 });
 searchQwant.addEventListener('click', () => {
     document.getElementById('SerachEngineChangeBtn').textContent = "Qwant";
@@ -2194,6 +2415,7 @@ searchQwant.addEventListener('click', () => {
     localStorage.setItem('YahooSearch', "false");
     localStorage.setItem('GoogleSearch', "false");
     localStorage.setItem('AndiSearch', "false");
+    localStorage.setItem('BraveSearch', "false");
 });
 searchAndi.addEventListener('click', () => {
     document.getElementById('SerachEngineChangeBtn').textContent = "Andi Search";
@@ -2207,6 +2429,7 @@ searchAndi.addEventListener('click', () => {
     localStorage.setItem('BingSearch', "false");
     localStorage.setItem('YahooSearch', "false");
     localStorage.setItem('GoogleSearch', "false");
+    localStorage.setItem('BraveSearch', "false");
 });
 
 
@@ -2251,6 +2474,12 @@ window.addEventListener('load', () =>{
         infoSymbol.style.display = 'block';
 
     }
+    if (localStorage.getItem('BraveSearch') === "true") {
+        document.getElementById('SerachEngineChangeBtn').textContent = "Brave";
+        document.getElementById('searchInput').placeholder = "Search with Brave..."
+
+    }
+
 });
 
 aiFastInput.addEventListener('input', function() {
@@ -2281,6 +2510,7 @@ const observer = new MutationObserver((mutations) => {
         }
     });
 });
+
 
 observer.observe(aiContainer, { 
     attributes: true, 
@@ -2961,47 +3191,98 @@ function openMenuSide() {
         sideMenu.classList.remove('open');
     });
 
-    historyButton.addEventListener('click', () => {
-        historyMenu.style.display = (historyMenu.style.display === 'block') ? 'none' : 'block';
-        clearHistoryButton.style.display = historyMenu.style.display === 'block' ? 'block' : 'none'; // Button nur anzeigen, wenn History sichtbar
-        if (historyMenu.style.display === 'block') {
-            historyMenu.style.opacity = '1'; // Zeigt die Liste mit Animation an
-            if (searchHistory.length > 0) {
-                historyMenu.innerHTML = '';
-                searchHistory.forEach((query, index) => {
-                    const historyItem = document.createElement('div');
-                    historyItem.classList.add('history-item');
-                    historyItem.textContent = query;
 
-                    // Klick auf Historie zum Öffnen
-                    historyItem.addEventListener('click', () => {
-                        if (query.match(/^(https?:\/\/)/)) {
-                            window.location.href = query;
-                        } else {
-                            window.location.href = 'https://www.google.com/search?q=' + encodeURIComponent(query);
-                        }
-                    });
 
-                 
+searchInput.addEventListener('focus', () => {
+    const savedSearchItems = JSON.parse(localStorage.getItem("searchHistory")) || [];
+    const list = document.getElementById("searchList");
 
-                    // Löschen Button hinzufügen
-                    const deleteButton = document.createElement('button');
-                    deleteButton.classList.add('delete-btn');
-                    deleteButton.textContent = 'X';
-                    deleteButton.addEventListener('click', (e) => {
-                        e.stopPropagation(); // Verhindert das Öffnen der URL beim Klicken auf das Löschen
-                        searchHistory.splice(index, 1);
-                        localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
-                        historyItem.remove();
-                    });
-
-                    historyItem.appendChild(deleteButton);
-                    historyMenu.appendChild(historyItem);
-                });
-            }
+    searchInput.addEventListener('keydown', (e) => {  // 
+        if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            const item = localStorage.getItem('LastSearchInput');
+            searchInput.value = item || '';
         }
     });
+    
 
+    
+    list.innerHTML = "";
+
+    savedSearchItems.forEach((query, index) => {
+        const li = document.createElement("li");
+        li.textContent = query;
+        const btn = document.createElement("button");
+        btn.textContent = "X";
+        btn.style.color = "red";
+        btn.style.height = "20px";
+        btn.style.width = "20px";
+        btn.style.zIndex = "1010";
+        btn.style.display = "block";
+        btn.style.float = "right";
+        btn.style.background = "none";
+        btn.style.border = "none";
+        list.appendChild(btn);
+        li.addEventListener('click', () => {
+            
+            
+
+            if (query.match(/^(https?:\/\/)/)) {
+                window.location.href = query; // Gehe direkt zur URL
+            } else if (localStorage.getItem("GoogleSearch") === "true") {
+             window.location.href = 'https://www.google.com/search?q=' + encodeURIComponent(query); 
+            } else if (localStorage.getItem("YahooSearch") === "true") {
+                window.location.href = 'https://search.yahoo.com/search?p=' + encodeURIComponent(query); 
+            } else if (localStorage.getItem("BingSearch") === "true") {
+                window.location.href = 'https://www.bing.com/search?q=' + encodeURIComponent(query); 
+            } else if (localStorage.getItem("DuckSearch") === "true") {
+                window.location.href = 'https://duckduckgo.com/?q=' + encodeURIComponent(query); 
+            } else if (localStorage.getItem("EcosiaSearch") === "true") {
+                window.location.href = 'https://www.ecosia.org/search?method=index&q=' + encodeURIComponent(query); 
+            } else if (localStorage.getItem("QwantSearch") === "true") {
+                window.location.href = 'https://www.qwant.com/?q=' + encodeURIComponent(query); 
+            } else if (localStorage.getItem("AndiSearch") === "true") {
+                window.location.href = 'https://andisearch.com/?query=' + encodeURIComponent(query); 
+            } else if (localStorage.getItem("BraveSearch") === "true") {
+                window.location.href = 'https://search.brave.com/search?q=' + encodeURIComponent(query); 
+            } else {
+                window.location.href = 'https://www.google.com/search?q=' + encodeURIComponent(query); 
+            }
+    });
+    li.addEventListener('contextmenu', () => {
+        
+            savedSearchItems.splice(index, 1);
+            localStorage.removeItem('searchHistory');
+            
+            window.location.reload();
+        
+    });
+    btn.addEventListener('click', () => {
+        
+            savedSearchItems.splice(index, 1);
+            localStorage.setItem('searchHistory', JSON.stringify(savedSearchItems));
+            
+            
+            li.remove(); 
+            window.location.reload();
+        
+    });
+
+        if (localStorage.getItem('hyperaibtoggle3') === 'true') {
+            list.appendChild(li);
+    }
+         
+    });
+});
+
+
+    historyButton.addEventListener('click', () => {
+        SHistory.style.display = 'block'
+        const elmt = document.querySelector('.search-input');
+        elmt.style.borderRadius = '25px 0 0 0px';
+        
+    });
+    
     clearHistoryButton.addEventListener('click', () => {
         searchHistory = [];
         localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
@@ -3050,6 +3331,8 @@ function openMenuSide() {
                         window.location.href = 'https://www.qwant.com/?q=' + encodeURIComponent(query); 
                      }else if (localStorage.getItem("AndiSearch") === "true") {
                         window.location.href = 'https://andisearch.com/?query=' + encodeURIComponent(query); 
+                    } else if (localStorage.getItem("BraveSearch") === "true") {
+                        window.location.href = 'https://search.brave.com/search?q=' + encodeURIComponent(query); 
                     } else {
                         window.location.href = 'https://www.google.com/search?q=' + encodeURIComponent(query); 
                     }
@@ -3058,14 +3341,15 @@ function openMenuSide() {
             
         }
 
-        // Füge die Anfrage zur Historie hinzu
-        if (!searchHistory.includes(query)) {
-            if (prmodus) {
-                
-            } else {
+            //  Add Search
+            
+            if (localStorage.getItem('hyperaibtoggle3') === 'true') {
+            localStorage.setItem('LastSearchInput', query);
+    
             searchHistory.unshift(query); // Neue Anfrage am Anfang der Liste
             localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
-            }}
+            }
+        
     }
 
     searchInput.value = '';
@@ -4326,7 +4610,7 @@ bg5InputText.addEventListener('input', () => {
                 
                 
                 
-                
+                this.previewsMessage();
                 this.setupEventListeners();
             }
             
@@ -4334,11 +4618,22 @@ bg5InputText.addEventListener('input', () => {
                 
                 this.messageInput.addEventListener('keypress', (e) => {
                     if (e.key === 'Enter') this.sendMessage();
+                    
                 });
-                
-                
             }
-            
+            previewsMessage() {
+                this.messageInput.addEventListener('keydown', (e) => {
+                    
+                    if (e.key === 'ArrowUp') {
+                        e.preventDefault();
+                        messageInput.value = localStorage.getItem('messageBefore') || '';
+
+                        
+                }
+                });
+            }
+
+
             addMessage(sender, message, isUser = false) {
                 const messageDiv = document.createElement('div');
                 messageDiv.className = `message ${isUser ? 'user-message' : 'shape-message'}`;
@@ -4395,14 +4690,20 @@ bg5InputText.addEventListener('input', () => {
     
     switch (command) {
         case '/help':
-            this.addMessage('Hyper-AI', 'Here are all the available commands:');
-            this.addMessage('Commands', '/help  | Shows this Page!');
-            this.addMessage('Commands', '/reset | Resets everything to default settings!');
-            this.addMessage('Commands', '/time  | Shows the current Time!');
-            this.addMessage('Commands', '/image [description] | Generates an image based on the description!');
-            this.addMessage('Commands', '/background [color/hex:#ffffff] | Changes the background color [color/hex]!');
-            this.addMessage('Commands', '/hypertext [text] | Changes the Hyper-B text in the Search box!');
-            this.addMessage('Commands', '/size [small/medium/large] | Changes the Size of the AI Container!');
+            this.showTyping();
+           
+            setTimeout(() => {
+                this.removeTyping();
+                this.addMessage('Hyper-AI', 'Here are all the available commands:');
+                this.addMessage('Commands', '/help  | Shows this Page!');
+                this.addMessage('Commands', '/reset | Resets everything to default settings!');
+                this.addMessage('Commands', '/time  | Shows the current Time!');
+                this.addMessage('Commands', '/image [description] | Generates an image based on the description!');
+                this.addMessage('Commands', '/background [color/hex:#ffffff] | Changes the background color [color/hex]!');
+                this.addMessage('Commands', '/hypertext [text] | Changes the Hyper-B text in the Search box!');
+                this.addMessage('Commands', '/size [small/medium/large] | Changes the Size of the AI Container!');
+            }, 800);
+            
             
             break;           
             
@@ -4414,22 +4715,42 @@ bg5InputText.addEventListener('input', () => {
             setTimeout(() => {
                 this.chatMessages.innerHTML = '';
             }, 1000);
+            
             break;
             
         case '/time':
-            const now = new Date().toLocaleTimeString();
-            this.addMessage('Hyper-AI', `Current Time: ${now}`);
+            this.showTyping();
+            setTimeout(() => {
+                this.removeTyping();
+                const now = new Date().toLocaleTimeString();
+                this.addMessage('Hyper-AI', `Current Time: ${now}`);
+            }, 300);
+            
             break;
         case '/reset':
-            localStorage.clear();
-            this.addMessage('Hyper-AI', 'Hyper-B has been reset. All changes where set to deafult. To see the changes reload the page.');
+            const ask = prompt("Are you sure to Clear you LocalStrorage at Hyper-B? The Localstorage is where everything is safed (Favorites,Profiles,Style) to Clear it Type "+'"Yes"')
+            if (ask === 'Yes') {
+                localStorage.clear();
+                this.addMessage('Hyper-AI', 'Hyper-B has been reset. All changes where set to deafult. To see the changes reload the page.');
+            }
+            this.addMessage('Hyper-AI', 'Reset Declined!');
             break;
-            
+        
+
         default:
         // Prüfen ob es ein /image Kommando ist
         if (command.startsWith('/image')) {
             this.sendToAI(message, sender);
-        } 
+        }
+        if (command.startsWith('/wack')) {
+            
+            this.sendToAI(message, sender);
+            
+                
+           
+            
+        }
+       
         // Prüfen ob es ein /background Kommando ist
         else if (command.startsWith('/background')) {
             const backgroundColor = message.substring(12); 
@@ -4513,8 +4834,22 @@ bg5InputText.addEventListener('input', () => {
                 this.addMessage('Hyper-AI', 'Changed the Container size to large.');
             } 
         }
-        
-        else {
+        else if (command.startsWith('/name')) {
+            const name = message.slice(command.indexOf(' ') + 1);
+            if (name.trim()) { 
+                localStorage.setItem('usernameShape', name.trim());
+                document.getElementById('senderInput').value = name.trim();
+                
+                this.addMessage('Hyper-AI', `Change your name to "${name.trim()}"`);        
+            } else {
+                this.addMessage('Error', 'Please Enter a name!');
+            }
+        }
+
+
+
+
+        else if (!command.startsWith('/name') && !command.startsWith('/hypertext') && !command.startsWith('/ht') && !command.startsWith('/size') && !command.startsWith('/bg') && !command.startsWith('/background') && !command.startsWith('/image')) {
             this.addMessage('Error', `Unrecognized command: ${message}`);
         }
     }
@@ -4523,7 +4858,7 @@ bg5InputText.addEventListener('input', () => {
             
 
 
-            async sendToAI(message, sender) {
+            async sendToAI(message, sender) { 
     if (!this.apiKey || !this.shapeUsername) {
         this.showError('Error');
         return;
@@ -4576,7 +4911,7 @@ bg5InputText.addEventListener('input', () => {
 
                 if (!message) return;
 
-           
+                localStorage.setItem('messageBefore', message);
                 if (message.startsWith('/')) {
                 this.handleSlashCommand(message, sender);
                 return;
@@ -4640,7 +4975,12 @@ bg5InputText.addEventListener('input', () => {
 document.addEventListener('DOMContentLoaded', () => {
     shapesChat = new ShapesChat();
 });
-   
+
+
+//  Functions
+
+
+
 
    
 </script>
