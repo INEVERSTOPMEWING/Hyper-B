@@ -2164,16 +2164,7 @@ closeai.addEventListener('click', () => {
         if(localStorage.getItem('permaUpdate')==='true') {
             permaUpdate();
         }
-        if (localStorage.getItem('nevershow') === 'true') {
-            document.getElementById('updateMenuDiv').style.display = 'none';
-        } else {
-            const closed = localStorage.getItem('closed4');
-            if (!closed) {
-                document.getElementById('updateMenuDiv').style.display = 'block';
-            } else {
-                document.getElementById('updateMenuDiv').style.display = 'none';
-            }
-        }
+        document.getElementById('updateMenuDiv').style.display = 'block';
         
 
     });
