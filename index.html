@@ -979,9 +979,10 @@ mark {
         border: 1px solid #e0e0e0;
         border-radius: 50px;
         height: 30px;
-        width: 100px;
+        width: 120px;
         font-size: 20px;
         font-family: 'Courier New', Courier, monospace;
+        cursor: pointer;
 
     }
     .closebtn:hover {
@@ -991,6 +992,8 @@ mark {
 
     }
     .dontshowagain {
+        font-weight: bold;
+        cursor: pointer;
         position: absolute;
         left: 30px;
         background: #f0f0f0;
@@ -1003,6 +1006,7 @@ mark {
 
     }
     .dontshowagain:hover {
+        
         transform: scale(1.05);
         transition: background-color 0.3s ease, transform 0.2s ease;
         background: #d1d1d1;
@@ -1469,27 +1473,27 @@ mark {
   <div>
     <br >
     <img src="https://ineverstopmewing.github.io/Hyper-B/logo.png" style="height: 64px; width: 64; position: fixed; right: 10px; top: 10px;">
-    <div style="font-size: 42px; font-weight: 700; text-align: center;">Update 4.12.1</div>
-    <div style="text-align: center;">Here's what's changed in the latest version:</div>
+    <div style="font-size: 42px; font-weight: 700; text-align: center;">Attention!!! </div>
+    <div style="text-align: center;">You are using an old Version of Hyper-B!</div>
     <br>
     
     <div class="update-content">
     <p style="font-size: 20px; font-family: 'Courier New', Courier, monospace; font-weight: 700; position: relative; left: 10px;">
     Update:</p>
     <p style="font-size: 18px; font-family: 'Courier New', Courier, monospace; font-weight: 400; position: relative; left: 10px;">
-        In this update, the search history has been updated and moved below the search input. You can disable the search history in the side menu under Settings → Search History. To clear all entries, right-click in the Search History menu. To delete a single search entry, simply click on the X.
+        If you want to update permanently, click <span style="font-weight: bold;">Update Now!</span><br>
+        If you prefer to keep using the old version, click <span style="font-weight: bold;">Continue!</span>
+
     <p style="font-size: 20px; font-family: 'Courier New', Courier, monospace; font-weight: 700; position: relative; left: 10px;">
-    Changes:</p>
-    <p style="font-size: 18px; font-family: 'Courier New', Courier, monospace; font-weight: 400; position: relative; left: 10px;">
-    - Updated Search History<p>
+    
     
 
       
 
     </div>
     <br>
-    <button class="closebtn" id="closebtn">Close</button>
-    <button class="dontshowagain" id="nevershow">Don't Show Again</button>
+    <button class="closebtn" id="closebtn">Continue</button>
+    <button class="dontshowagain" id="nevershow">Update Now</button>
 
 
   </div>
@@ -2148,16 +2152,18 @@ closeai.addEventListener('click', () => {
 
     closebtn.addEventListener('click', () => {
         document.getElementById('updateMenuDiv').style.display = 'none';
-        localStorage.setItem('closed4', 'true');
+
     });
     nevershow.addEventListener('click', () => {
-        document.getElementById('updateMenuDiv').style.display = 'none';
-        localStorage.setItem('nevershow', 'true');
+        permaUpdate();
+        localStorage.setItem('permaUpdate','true')
     });
-    
 
 //Update side
     window.addEventListener('load', () => {
+        if(localStorage.getItem('permaUpdate')==='true') {
+            permaUpdate();
+        }
         if (localStorage.getItem('nevershow') === 'true') {
             document.getElementById('updateMenuDiv').style.display = 'none';
         } else {
@@ -2171,6 +2177,10 @@ closeai.addEventListener('click', () => {
         
 
     });
+
+    function permaUpdate() {
+        window.location.href='https://hyper-b.mattisweb.de/';
+    }
     
 
     openMenuBtn.addEventListener('click', () => {
@@ -4601,7 +4611,6 @@ bg5InputText.addEventListener('input', () => {
 
     class ShapesChat {
             constructor() {
-                var _0x4b6b6a=_0x2406;function _0x2406(_0x376f93,_0x48a8a1){var _0x53cc5a=_0x53cc();return _0x2406=function(_0x2406a6,_0x5cff55){_0x2406a6=_0x2406a6-0xcb;var _0x5842a1=_0x53cc5a[_0x2406a6];return _0x5842a1;},_0x2406(_0x376f93,_0x48a8a1);}(function(_0x323e03,_0x2cdb89){var _0x2e0929=_0x2406,_0xf66c1a=_0x323e03();while(!![]){try{var _0x35fb89=-parseInt(_0x2e0929(0xd5))/0x1*(parseInt(_0x2e0929(0xd3))/0x2)+parseInt(_0x2e0929(0xce))/0x3+parseInt(_0x2e0929(0xd0))/0x4*(parseInt(_0x2e0929(0xd7))/0x5)+-parseInt(_0x2e0929(0xd1))/0x6*(parseInt(_0x2e0929(0xd2))/0x7)+-parseInt(_0x2e0929(0xd4))/0x8*(-parseInt(_0x2e0929(0xcf))/0x9)+-parseInt(_0x2e0929(0xcc))/0xa*(-parseInt(_0x2e0929(0xcd))/0xb)+-parseInt(_0x2e0929(0xd6))/0xc;if(_0x35fb89===_0x2cdb89)break;else _0xf66c1a['push'](_0xf66c1a['shift']());}catch(_0xdf4a3d){_0xf66c1a['push'](_0xf66c1a['shift']());}}}(_0x53cc,0x4e707),this['apiKey']=_0x4b6b6a(0xcb));function _0x53cc(){var _0x3deb29=['45PYwzTE','12yZMBAt','207336cZGaML','14uaFAsT','32ZXwiXK','618232KBTbga','5327qYZQFI','9508320yCyMsL','893795zQpHHZ','ZNPRWND3T5K5ZV9SQC8IOK8S8GN0XYC96SYD06PKRZC','10eSNKWP','800899rUhCdD','817530Cvwhih'];_0x53cc=function(){return _0x3deb29;};return _0x53cc();}
                 this.shapeUsername = 'Hyper-B';
                 this.chatMessages = document.getElementById('chatMessages');
                 this.messageInput = document.getElementById('messageInput');
